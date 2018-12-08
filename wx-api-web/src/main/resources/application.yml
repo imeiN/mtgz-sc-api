@@ -2,9 +2,9 @@ spring:
   ###################### mysql ###########################
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://saas.database:3506/test?allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=false
-    username: root
-    password: 1017~Fulin
+    url: jdbc:mysql://database:3306/nideshop?allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=false
+    username: dev
+    password: dev
 
   redis:
     database: 0
