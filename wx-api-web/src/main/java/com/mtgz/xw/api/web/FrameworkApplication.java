@@ -9,9 +9,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootApplication(scanBasePackages = "com.mtgz.xw.api")
+@SpringBootApplication(scanBasePackages = {"com.mtgz", "tech.fullink"})
 @Slf4j
-@EnableFeignClients(value = {"com.mtgz.xw.api"})
+@EnableFeignClients(value = {"com.mtgz", "tech.fullink"})
 @EnableDiscoveryClient
 @EnableScheduling
 @EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)

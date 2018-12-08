@@ -61,11 +61,11 @@
         <appender-ref ref="file" />
     </logger>
 
-    <logger name="com.mtgz.xw.api" level="debug" additivity="true">
+    <logger name="com.mtgz" level="debug" additivity="true">
         <appender-ref ref="STDOUT" />
     </logger>
 
-    <logger name="com.mtgz.xw.api" level="debug" additivity="false">
+    <logger name="com.mtgz" level="debug" additivity="false">
         <appender-ref ref="file" />
         <appender-ref ref="error" />
     </logger>

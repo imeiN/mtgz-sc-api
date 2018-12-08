@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mtgz.xw.api.dao.mapper.UserCouponMapper" >
 
-  <select id="queryByCouponNumber" resultMap="userCouponMap">
+  <select id="queryByCouponNumber" resultType="com.mtgz.xw.api.dao.model.UserCoupon">
     select * from nideshop_user_coupon where coupon_number = #{coupon_number}
   </select>
 
-  <select id="selectBy" resultMap="userCouponMap">
+  <select id="selectBy" resultType="com.mtgz.xw.api.dao.model.UserCoupon">
     select a.* from nideshop_user_coupon a
     left join nideshop_coupon b on b.id = a.coupon_id
     where 1 = 1

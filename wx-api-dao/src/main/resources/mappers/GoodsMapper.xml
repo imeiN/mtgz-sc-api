@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mtgz.xw.api.dao.mapper.GoodsMapper" >
 
-  <select id="queryHotGoodsList" resultMap="goodsMap">
+  <select id="queryHotGoodsList" resultType="com.mtgz.xw.api.dao.model.Goods">
     select a.*,b.id as product_id
     from nideshop_goods a
     left join nideshop_product b on a.id = b.goods_id
@@ -51,7 +51,7 @@
     </if>
   </select>
 
-  <select id="queryCatalogProductList" resultMap="goodsMap">
+  <select id="queryCatalogProductList" resultType="com.mtgz.xw.api.dao.model.Goods">
     select a.id, a.name, a.list_pic_url, a.market_price, a.retail_price, a.goods_brief, b.id AS
     product_id,count(og.id) as orderNum
     from nideshop_goods a

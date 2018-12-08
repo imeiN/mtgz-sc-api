@@ -20,3 +20,12 @@ spring:
         fulin-squeezy-cache:
           ttl: 600000
           maxSize: 1000
+
+mybatis:
+  config-location: classpath:mybatis.xml
+  mapper-locations: classpath:mappers/*.xml
+
+mapper:
+  mappers:
+  - com.mtgz.xw.api.dao.config.MyMapper
+  notEmpty: true
