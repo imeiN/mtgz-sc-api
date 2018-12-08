@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <conversionRule conversionWord="logId" converterClass="com.mtgz.common.service.common.util.LogUtil"/>
+    <conversionRule conversionWord="logId" converterClass="com.mtgz.common.service.common.util.UuidConvert"/>
 
     <conversionRule conversionWord="ip" converterClass="com.mtgz.common.service.common.util.IPLogConfig" />
 
