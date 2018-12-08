@@ -173,29 +173,29 @@
                 <version>2.0.1.Final</version>
             </dependency>
 
-            <!--<dependency>-->
-                <!--<groupId>tech.fullink</groupId>-->
-                <!--<artifactId>exception-handler</artifactId>-->
-                <!--<version>1.0-SNAPSHOT</version>-->
-            <!--</dependency>-->
+            <dependency>
+                <groupId>tech.fullink</groupId>
+                <artifactId>exception-handler</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
 
-            <!--<dependency>-->
-                <!--<groupId>tech.fullink</groupId>-->
-                <!--<artifactId>nail-common</artifactId>-->
-                <!--<version>1.0-SNAPSHOT</version>-->
-            <!--</dependency>-->
+            <dependency>
+                <groupId>tech.fullink</groupId>
+                <artifactId>nail-common</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
 
-            <!--<dependency>-->
-                <!--<groupId>tech.fullink</groupId>-->
-                <!--<artifactId>nail-test</artifactId>-->
-                <!--<version>1.0-SNAPSHOT</version>-->
-            <!--</dependency>-->
+            <dependency>
+                <groupId>tech.fullink</groupId>
+                <artifactId>nail-test</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
 
-            <!--<dependency>-->
-                <!--<groupId>tech.fullink</groupId>-->
-                <!--<artifactId>lock</artifactId>-->
-                <!--<version>1.0-SNAPSHOT</version>-->
-            <!--</dependency>-->
+            <dependency>
+                <groupId>tech.fullink</groupId>
+                <artifactId>lock</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
