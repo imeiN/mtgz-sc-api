@@ -3,8 +3,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://database:3306/nideshop?allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=false
-    username: dev
-    password: dev
+    username: root
+    password: 123456
 
   redis:
     database: 0
