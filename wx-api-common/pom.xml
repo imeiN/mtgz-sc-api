@@ -11,25 +11,25 @@
 
 
     <dependencies>
-        <dependency>
-            <groupId>tech.fullink</groupId>
-            <artifactId>exception-handler</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>tech.fullink</groupId>-->
+            <!--<artifactId>exception-handler</artifactId>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>tech.fullink</groupId>
-            <artifactId>nail-common</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>tech.fullink</groupId>-->
+            <!--<artifactId>nail-common</artifactId>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>tech.fullink</groupId>
-            <artifactId>nail-test</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>tech.fullink</groupId>-->
+            <!--<artifactId>nail-test</artifactId>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>tech.fullink</groupId>
-            <artifactId>lock</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>tech.fullink</groupId>-->
+            <!--<artifactId>lock</artifactId>-->
+        <!--</dependency>-->
 
     </dependencies>
 
