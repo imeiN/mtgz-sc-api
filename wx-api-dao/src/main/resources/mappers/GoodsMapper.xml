@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mtgz.xw.api.dao.mapper.GoodsMapper" >
+
+  <select id="queryHotGoodsList" resultMap="goodsMap">
+    select a.*,b.id as product_id
+    from nideshop_goods a
+    left join nideshop_product b on a.id = b.goods_id
+    left join nideshop_product c on a.id = c.goods_id and c.retail_price > b.retail_price and b.id != c.id
+    where 1 = 1 and b.id is not null and c.id is null and a.is_delete != 1
+    <if test="is_new != null and is_new != ''">
+      and a.is_new = #{is_new}
+    </if>
+    <if test="is_hot != null and is_hot != ''">
+      and a.is_hot = #{is_hot}
+    </if>
+    <if test="brand_id != null and brand_id != ''">
+      and a.brand_id = #{brand_id}
+    </if>
+    <if test="name != null and name != ''">
+      and a.'name' like concat('%',#{keyword},'%')
+    </if>
+    <if test="category_id != null and category_id != ''">
+      and a.category_id = #{category_id}
+    </if>
+    <if test="keyword != null">
+      and a.keywords like concat('%',#{keyword},'%')
+    </if>
+    <if test="categoryIds != null">
+      and a.category_id in
+      <foreach item="item" collection="categoryIds" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+    <if test="goods_ids != null">
+      and a.id in
+      <foreach item="item" collection="goods_ids" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by a.id desc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+  <select id="queryCatalogProductList" resultMap="goodsMap">
+    select a.id, a.name, a.list_pic_url, a.market_price, a.retail_price, a.goods_brief, b.id AS
+    product_id,count(og.id) as orderNum
+    from nideshop_goods a
+    left join nideshop_product b on a.id = b.goods_id
+    left join nideshop_product c on a.id = c.goods_id and c.retail_price > b.retail_price and b.id != c.id
+    left join nideshop_order_goods og on og.product_id = b.id
+    <if test="is_group != null and is_group == true">
+      left join nideshop_goods_group gg on gg.goods_id = a.id
+    </if>
+    where 1 = 1 and b.id is not null and c.id is null and a.is_delete != 1
+    <if test="is_new != null and is_new != ''">
+      and a.is_new = #{is_new}
+    </if>
+    <if test="is_hot != null and is_hot != ''">
+      and a.is_hot = #{is_hot}
+    </if>
+    <if test="brand_id != null and brand_id != ''">
+      and a.brand_id = #{brand_id}
+    </if>
+    <if test="name != null and name != ''">
+      and a.'name' like concat('%',#{keyword},'%')
+    </if>
+    <if test="category_id != null and category_id != ''">
+      and a.category_id = #{category_id}
+    </if>
+    <if test="keyword != null">
+      and a.keywords like concat('%',#{keyword},'%')
+    </if>
+    <if test="is_group != null and is_group == true">
+      and gg.id is not null
+    </if>
+    <if test="categoryIds != null">
+      and a.category_id in
+      <foreach item="item" collection="categoryIds" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+    <if test="goods_ids != null">
+      and a.id in
+      <foreach item="item" collection="goods_ids" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+    group by a.id, a.name, a.list_pic_url, a.market_price, a.retail_price, a.goods_brief, b.id
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by a.id desc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+</mapper>

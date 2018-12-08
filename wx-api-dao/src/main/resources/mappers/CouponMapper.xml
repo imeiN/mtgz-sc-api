@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mtgz.xw.api.dao.mapper.CouponMapper" >
+  <resultMap id="BaseResultMap" type="com.mtgz.xw.api.dao.model.Coupon" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <constructor >
+      <idArg column="id" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="type_money" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="send_type" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="min_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="max_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="send_start_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="send_end_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="use_start_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="use_end_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="min_goods_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="min_transmit_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+</mapper>

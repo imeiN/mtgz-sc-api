@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mtgz.xw.api.dao.mapper.TopicMapper" >
+  <resultMap id="BaseResultMap" type="com.mtgz.xw.api.dao.model.Topic" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <constructor >
+      <arg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="avatar" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="item_pic_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="subtitle" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="topic_category_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="price_info" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="read_count" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="scene_pic_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="topic_template_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="topic_tag_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+</mapper>

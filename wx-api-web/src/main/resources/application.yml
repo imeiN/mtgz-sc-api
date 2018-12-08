@@ -1,0 +1,22 @@
+spring:
+  ###################### mysql ###########################
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://saas.database:3506/test?allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 1017~Fulin
+
+  redis:
+    database: 0
+    host: saas.redis
+    port: 6379
+    password: 1017~Fulin2017
+
+  redisson:
+    cache-manager:
+      codec: jackson
+      configs:
+        #服务间调用缓存，缓存600s
+        fulin-squeezy-cache:
+          ttl: 600000
+          maxSize: 1000

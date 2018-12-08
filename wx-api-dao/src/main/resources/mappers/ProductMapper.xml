@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mtgz.xw.api.dao.mapper.ProductMapper" >
+
+  <select id="selectById" resultType="com.mtgz.xw.api.dao.model.Product">
+    select a.*, b.name as goods_name, b.list_pic_url as list_pic_url
+    from nideshop_product a left join nideshop_goods b on a.goods_id = b.id
+    where a.id = #{value}
+  </select>
+
+  <select id="selectBy" resultType="com.mtgz.xw.api.dao.model.Product">
+    select a.*,
+    b.name as goods_name,
+    b.list_pic_url as list_pic_url
+    from nideshop_product a
+    left join nideshop_goods b on a.goods_id = b.id
+    <where>
+      <if test="goods_id != null">
+        and a.goods_id = #{goods_id}
+      </if>
+    </where>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by a.id desc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+</mapper>

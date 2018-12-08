@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mtgz.xw.api.dao.mapper.OrderMapper" >
+
+  <select id="selectWithShopCodeByPrimaryKey" resultMap="orderMap">
+    select a.*,b.code as  shipping_code
+    from nideshop_order a
+    left join nideshop_shipping b on a.shipping_id = b.id
+    where a.id = #{value}
+  </select>
+
+  <select id="selectBy" resultType="com.mtgz.xw.api.dao.model.Order">
+    select * from nideshop_order
+    <where>
+      <if test="user_id != null">
+        and user_id = #{user_id}
+      </if>
+    </where>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by id desc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+</mapper>

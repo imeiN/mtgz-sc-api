@@ -1,0 +1,41 @@
+###################### server info #####################
+server:
+  port: 10003
+  ssl:
+    enabled: false
+  error:
+    whitelabel:
+      enabled: false
+
+logging:
+  level:
+    com.roberto.springcloud.feign: debug
+
+spring:
+  application:
+    name: graphql
+    ###################### consul ###########################
+  cloud:
+#    config:
+#      name: fulin-squeezy
+#      profile: test
+#      label: patch-10
+#      enabled: true
+#      fail-fast: true
+#      discovery:
+#        enabled: true
+#        service-id: eaglehorn-config-server
+    consul:
+      host: agent
+      port: 8500
+      discovery:
+        healthCheckUrl: http://localhost:${server.port}/health
+        healthCheckInterval: 15s
+        instance-id: graphql:${random.value}
+        hostname: agent
+        enabled: true
+        heartbeat:
+          enabled: true
+    service-registry:
+      auto-registration:
+        enabled: true

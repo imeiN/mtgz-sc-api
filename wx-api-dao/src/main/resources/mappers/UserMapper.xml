@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mtgz.xw.api.dao.mapper.UserMapper" >
+
+  <select id="queryByOpenId" resultType="com.mtgz.xw.api.dao.model.User">
+    select * from nideshop_user
+    where 1 = 1
+    <if test="openId != null">
+      and `weixin_openid` = #{openId}
+    </if>
+  </select>
+
+  <select id="queryByMobile" resultType="com.mtgz.xw.api.dao.model.User">
+    select * from nideshop_user
+    where 1 = 1
+    <if test="mobile != null">
+      and `mobile` = #{mobile}
+    </if>
+  </select>
+
+  <select id="selectBy" resultType="com.mtgz.xw.api.dao.model.User">
+    select * from nideshop_user
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by id desc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+  <select id="querySmsCodeByUserId" resultType="com.mtgz.xw.api.dao.model.SmsLog">
+    select
+    a.id,
+    a.user_id,
+    a.phone,
+    a.log_date,
+    a.sms_code,
+    a.send_status,
+    a.sms_text
+    from nideshop_sms_log a
+    left join nideshop_sms_log b on a.user_id = b.user_id and b.log_date > a.log_date
+    where a.user_id = #{user_id} and b.id is null
+  </select>
+
+  <insert id="saveSmsCodeLog" parameterType="com.mtgz.xw.api.dao.model.SmsLog">
+    insert into nideshop_sms_log(
+    `id`,
+    `user_id`,
+    `phone`,
+    `log_date`,
+    `sms_code`,
+    `send_status`,
+    `sms_text`)
+    values(
+    #{id},
+    #{user_id},
+    #{phone},
+    #{log_date},
+    #{sms_code},
+    #{send_status},
+    #{sms_text}
+    )
+  </insert>
+</mapper>

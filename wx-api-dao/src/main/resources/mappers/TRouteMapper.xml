@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tech.fullink.fulinsqueezy.store.mysql.mapper.TRouteMapper">
+  <!-- 查询路由 -->
+  <select id="list" parameterType="tech.fullink.fulinsqueezy.export.query.RouteQuery"
+          resultType="tech.fullink.fulinsqueezy.store.mysql.TRoute">
+    select *
+    from
+      t_route
+    <where>
+      <if test="id != null">
+        and id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="name != null">
+        and name LIKE CONCAT('%', #{name,jdbcType=VARCHAR}, '%')
+      </if>
+      <if test="uri != null">
+        and uri = #{uri,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=TINYINT}
+      </if>
+    </where>
+    ORDER BY id desc
+  </select>
+</mapper>

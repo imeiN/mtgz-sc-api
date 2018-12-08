@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mtgz.xw.api.dao.mapper.CartMapper" >
+
+  <update id="updateCheck">
+    update nideshop_cart
+    set `checked` = #{isChecked}
+    where product_id in
+    <foreach item="product_id" collection="productIds" open="(" separator="," close=")">
+      #{product_id}
+    </foreach>
+    and user_id = #{userId}
+  </update>
+
+  <delete id="deleteByProductIds">
+    delete from nideshop_cart where product_id in
+    <foreach item="id" collection="productIds" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </delete>
+
+  <delete id="deleteByUserAndProductIds">
+    delete from nideshop_cart where product_id in
+    <foreach item="id" collection="productIds" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    and user_id = #{user_id}
+  </delete>
+
+  <delete id="deleteByCart">
+    delete from nideshop_cart
+    where  user_id = #{user_id} and  session_id = #{session_id} and  checked = #{checked}
+  </delete>
+
+</mapper>
