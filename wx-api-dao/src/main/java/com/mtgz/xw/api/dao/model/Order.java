@@ -127,13 +127,20 @@ public class Order {
     private String orderType;
 
 
+    @Transient
     private Integer goodsCount; //订单的商品
+    @Transient
     private String order_status_text;//订单状态的处理
+    @Transient
     private Map handleOption; //可操作的选项
+    @Transient
     private BigDecimal full_cut_price; //订单满减
+    @Transient
     private String full_region;//区县
+    @Transient
     private String order_type; // 订单状态
     //快递公司code
+    @Transient
     private String shipping_code;
 
 }

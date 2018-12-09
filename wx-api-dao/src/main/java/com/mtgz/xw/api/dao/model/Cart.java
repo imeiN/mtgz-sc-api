@@ -93,6 +93,7 @@ public class Cart {
     private String goodsSpecifitionNameValue;
 
     //product表中的零售价格
+    @Transient
     private BigDecimal retailProductPrice;
 
 }

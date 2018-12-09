@@ -56,9 +56,11 @@ public class Product {
     private BigDecimal marketPrice;
 
     //商品名称
+    @Transient
     private String goodsName;
 
     //商品图片
+    @Transient
     private String listPicUrl;
 
 

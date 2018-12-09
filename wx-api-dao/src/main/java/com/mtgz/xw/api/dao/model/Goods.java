@@ -161,9 +161,11 @@ public class Goods {
 
 
     //购物车中商品数量
+    @Transient
     private Integer cart_num = 0;
     // 冗余
     // 产品Id
+    @Transient
     private Integer product_id;
 
 

@@ -26,6 +26,7 @@ public class GoodsSpecification {
     @Column(name = "pic_url")
     private String picUrl;
 
+    @Transient
     private String name;
 
 }

@@ -53,9 +53,11 @@ public class Coupon {
     private Integer minTransmitNum;
 
     //优惠券状态 1 可用 2 已用 3 过期
+    @Transient
     private Integer couponStatus = 1;
 
     //可用 1:可用 0：不可用
+    @Transient
     private Integer enabled = 0;
 
 }

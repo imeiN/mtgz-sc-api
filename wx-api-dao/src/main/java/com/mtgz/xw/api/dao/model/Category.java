@@ -54,8 +54,10 @@ public class Category {
     @Column(name = "front_name")
     private String frontName;
 
+    @Transient
     private Boolean checked;
 
+    @Transient
     private List<Category> subCategoryList;
 
 }

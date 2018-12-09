@@ -50,7 +50,10 @@ public class Comment {
     @Column(name = "user_id")
     private Long userId;
 
+    @Transient
     private User user_info;
+
+    @Transient
     private List<CommentPicture> pic_list;
 
 }

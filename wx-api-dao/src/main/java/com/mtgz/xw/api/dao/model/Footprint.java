@@ -42,13 +42,19 @@ public class Footprint {
      */
     private Long referrer;
 
+    @Transient
     private String name;
+    @Transient
     private String list_pic_url;
+    @Transient
     private String goods_brief;
     //
+    @Transient
     private BigDecimal retail_price;
     // 会员
+    @Transient
     private String nickname;
+    @Transient
     private String avatar;
 
 
