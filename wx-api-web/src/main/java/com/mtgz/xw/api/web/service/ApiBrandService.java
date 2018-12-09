@@ -31,7 +31,7 @@ public class ApiBrandService {
 	
 	
 	public void save(Brand brand){
-		brandDao.insert(brand);
+		brandDao.insertSelective(brand);
 	}
 	
 	

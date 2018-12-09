@@ -31,7 +31,7 @@ public class ApiFeedbackService {
 
 
     public void save(Feedback feedbackVo) {
-        feedbackMapper.insert(feedbackVo);
+        feedbackMapper.insertSelective(feedbackVo);
     }
 
 

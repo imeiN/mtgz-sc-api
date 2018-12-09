@@ -31,7 +31,7 @@ public class ApiAdService {
 
 
     public void save(Ad brand) {
-        adDao.insert(brand);
+        adDao.insertSelective(brand);
     }
 
 

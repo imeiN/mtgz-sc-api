@@ -31,7 +31,7 @@ public class ApiAddressService {
 
 
     public void save(Address address) {
-        addressDao.insert(address);
+        addressDao.save(address);
     }
 
 

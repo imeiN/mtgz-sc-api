@@ -30,7 +30,7 @@ public class ApiCommentPictureService {
     }
 
     public int save(CommentPicture comment) {
-        return commentPictureDao.insert(comment);
+        return commentPictureDao.insertSelective(comment);
     }
 
 

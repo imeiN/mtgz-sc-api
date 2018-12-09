@@ -31,7 +31,7 @@ public class ApiCollectService {
 
 
     public int save(Collect collect) {
-        return collectDao.insert(collect);
+        return collectDao.insertSelective(collect);
     }
 
 

@@ -29,7 +29,7 @@ public class ApiCouponService {
 
 
     public void save(Coupon userVo) {
-        apiCouponMapper.insert(userVo);
+        apiCouponMapper.insertSelective(userVo);
     }
 
     public void update(Coupon user) {

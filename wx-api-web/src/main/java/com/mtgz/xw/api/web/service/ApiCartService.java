@@ -33,7 +33,7 @@ public class ApiCartService {
 
 
     public void save(Cart cart) {
-        cartDao.insert(cart);
+        cartDao.insertSelective(cart);
         // 更新购物车搭配减价
         // 判断购物车中是否存在此规格商品
         Map cartParam = new HashMap();

@@ -31,7 +31,7 @@ public class ApiSearchHistoryService {
 
 
     public void save(SearchHistory region) {
-        searchHistoryDao.save(region);
+        searchHistoryDao.insertSelective(region);
     }
 
 

@@ -37,7 +37,7 @@ public class ApiFootprintService {
 
 
     public void save(Footprint footprint) {
-        footprintDao.insert(footprint);
+        footprintDao.save(footprint);
     }
 
 

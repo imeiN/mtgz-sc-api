@@ -30,7 +30,7 @@ public class ApiAttributeService {
 
 
     public void save(Attribute goods) {
-        attributeMapper.insert(goods);
+        attributeMapper.insertSelective(goods);
     }
 
 

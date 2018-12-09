@@ -34,7 +34,7 @@ public class ApiCommentService {
     }
 
     public int save(Comment comment) {
-        return commentDao.insert(comment);
+        return commentDao.insertSelective(comment);
     }
 
 

@@ -31,7 +31,7 @@ public class ApiGoodsIssueService {
 
 
     public void save(GoodsIssue goods) {
-        goodsIssueDao.insert(goods);
+        goodsIssueDao.insertSelective(goods);
     }
 
 

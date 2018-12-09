@@ -31,7 +31,7 @@ public class ApiChannelService {
 
 
     public void save(Channel order) {
-        channelDao.insert(order);
+        channelDao.insertSelective(order);
     }
 
 

@@ -31,7 +31,7 @@ public class ApiCategoryService {
 	
 	
 	public void save(Category category){
-		categoryDao.insert(category);
+		categoryDao.insertSelective(category);
 	}
 	
 	

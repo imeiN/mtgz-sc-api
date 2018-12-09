@@ -31,7 +31,7 @@ public class ApiGoodsGalleryService {
 
 
     public void save(GoodsGallery goods) {
-        goodsGalleryDao.insert(goods);
+        goodsGalleryDao.insertSelective(goods);
     }
 
 
