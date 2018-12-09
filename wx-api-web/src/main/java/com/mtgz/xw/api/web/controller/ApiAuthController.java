@@ -72,14 +72,12 @@ public class ApiAuthController extends ApiBaseAction {
     @PostMapping("login_by_weixin")
     public Object loginByWeixin() {
         JSONObject jsonParam = this.getJsonRequest();
-        FullUserInfo fullUserInfo = null;
-        String code = "";
-        if (!StringUtils.isNullOrEmpty(jsonParam.getString("code"))) {
-            code = jsonParam.getString("code");
-        }
-        if (null != jsonParam.get("userInfo")) {
-            fullUserInfo = jsonParam.getObject("userInfo", FullUserInfo.class);
-        }
+        String code = jsonParam.getString("code");
+        log.info("login code: " + code);
+
+        FullUserInfo fullUserInfo = jsonParam.getObject("userInfo", FullUserInfo.class);
+
+        log.info("log userinfo: " + fullUserInfo);
         if (null == fullUserInfo) {
             return toResponsFail("登录失败");
         }
