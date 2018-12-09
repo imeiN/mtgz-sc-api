@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.mtgz.xw.api.common.AppConstants;
 import com.mtgz.xw.api.dao.model.User;
 import com.mtgz.xw.api.web.annotation.IgnoreAuth;
+import com.mtgz.xw.api.web.config.WxConfig;
 import com.mtgz.xw.api.web.service.ApiUserService;
 import com.mtgz.xw.api.web.service.TokenService;
 import com.mtgz.common.service.common.util.*;
@@ -41,6 +42,8 @@ public class ApiAuthController extends ApiBaseAction {
     private ApiUserService userService;
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private WxConfig wxConfig;
 
     /**
      * 登录
@@ -86,7 +89,11 @@ public class ApiAuthController extends ApiBaseAction {
         UserInfo userInfo = fullUserInfo.getUserInfo();
 
         //获取openid
-        String requestUrl = ApiUserUtils.getWebAccess(code);//通过自定义工具类组合出小程序需要的登录凭证 code
+        String requestUrl = ApiUserUtils.getWebAccess(code,
+                wxConfig.getWebAccessTokenhttps(),
+                wxConfig.getAppId(),
+                wxConfig.getSecret());//通过自定义工具类组合出小程序需要的登录凭证 code
+
         log.info("》》》组合token为：" + requestUrl);
         JSONObject sessionData = CommonUtil.httpsRequest(requestUrl, "GET", null);
 

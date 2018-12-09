@@ -4,6 +4,7 @@ import com.mtgz.common.service.client.CacheClient;
 import com.mtgz.xw.api.common.AppConstants;
 import com.mtgz.xw.api.dao.model.*;
 import com.mtgz.xw.api.web.annotation.LoginUser;
+import com.mtgz.xw.api.web.config.WxConfig;
 import com.mtgz.xw.api.web.service.ApiOrderGoodsService;
 import com.mtgz.xw.api.web.service.ApiOrderService;
 import com.mtgz.common.service.common.util.*;
@@ -37,7 +38,9 @@ public class ApiPayController extends ApiBaseAction {
     @Autowired
     private ApiOrderGoodsService orderGoodsService;
     @Autowired
-    CacheClient cacheClient;
+    private CacheClient cacheClient;
+    @Autowired
+    private WxConfig wxConfig;
 
     /**
      */
@@ -72,9 +75,9 @@ public class ApiPayController extends ApiBaseAction {
 
         try {
             Map<Object, Object> parame = new TreeMap<Object, Object>();
-            parame.put("appid", ResourceUtil.getConfigByName("wx.appId"));
+            parame.put("appid", wxConfig.getAppId());
             // 商家账号。
-            parame.put("mch_id", ResourceUtil.getConfigByName("wx.mchId"));
+            parame.put("mch_id", wxConfig.getMchId());
             String randomStr = CharUtil.getRandomNum(18).toUpperCase();
             // 随机字符串
             parame.put("nonce_str", randomStr);
@@ -100,18 +103,20 @@ public class ApiPayController extends ApiBaseAction {
             //支付金额
             parame.put("total_fee", orderInfo.getActualPrice().multiply(new BigDecimal(100)).intValue());
             // 回调地址
-            parame.put("notify_url", ResourceUtil.getConfigByName("wx.notifyUrl"));
+            parame.put("notify_url", wxConfig.getNotifyUrl());
             // 交易类型APP
-            parame.put("trade_type", ResourceUtil.getConfigByName("wx.tradeType"));
+            parame.put("trade_type", wxConfig.getTradeType());
             parame.put("spbill_create_ip", getClientIp());
             parame.put("openid", loginUser.getWeixinOpenid());
-            String sign = WechatUtil.arraySign(parame, ResourceUtil.getConfigByName("wx.paySignKey"));
+            String sign = WechatUtil.arraySign(parame, wxConfig.getPaySignKey());
             // 数字签证
             parame.put("sign", sign);
 
             String xml = MapUtils.convertMap2Xml(parame);
             log.info("xml:" + xml);
-            Map<String, Object> resultUn = XmlUtil.xmlStrToMap(WechatUtil.requestOnce(ResourceUtil.getConfigByName("wx.uniformorder"), xml));
+            Map<String, Object> resultUn = XmlUtil.xmlStrToMap(
+                    WechatUtil.requestOnce(wxConfig.getUniformorder(), xml, wxConfig.getMchId())
+            );
             // 响应报文
             String return_code = MapUtils.getString("return_code", resultUn);
             String return_msg = MapUtils.getString("return_msg", resultUn);
@@ -127,12 +132,12 @@ public class ApiPayController extends ApiBaseAction {
                 } else if (result_code.equalsIgnoreCase("SUCCESS")) {
                     String prepay_id = MapUtils.getString("prepay_id", resultUn);
                     // 先生成paySign 参考https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&index=5
-                    resultObj.put("appId", ResourceUtil.getConfigByName("wx.appId"));
+                    resultObj.put("appId", wxConfig.getAppId());
                     resultObj.put("timeStamp", DateUtils.timeToStr(System.currentTimeMillis() / 1000, DateUtils.DATE_TIME_PATTERN));
                     resultObj.put("nonceStr", nonceStr);
                     resultObj.put("package", "prepay_id=" + prepay_id);
                     resultObj.put("signType", "MD5");
-                    String paySign = WechatUtil.arraySign(resultObj, ResourceUtil.getConfigByName("wx.paySignKey"));
+                    String paySign = WechatUtil.arraySign(resultObj, wxConfig.getPaySignKey());
                     resultObj.put("paySign", paySign);
                     // 业务处理
                     orderInfo.setPayId(prepay_id);
@@ -161,16 +166,16 @@ public class ApiPayController extends ApiBaseAction {
 
         Order orderDetail = orderService.selectByPrimaryKey(orderId);
         Map<Object, Object> parame = new TreeMap<Object, Object>();
-        parame.put("appid", ResourceUtil.getConfigByName("wx.appId"));
+        parame.put("appid", wxConfig.getAppId());
         // 商家账号。
-        parame.put("mch_id", ResourceUtil.getConfigByName("wx.mchId"));
+        parame.put("mch_id", wxConfig.getMchId());
         String randomStr = CharUtil.getRandomNum(18).toUpperCase();
         // 随机字符串
         parame.put("nonce_str", randomStr);
         // 商户订单编号
         parame.put("out_trade_no", orderDetail.getOrderSn());
 
-        String sign = WechatUtil.arraySign(parame, ResourceUtil.getConfigByName("wx.paySignKey"));
+        String sign = WechatUtil.arraySign(parame, wxConfig.getPaySignKey());
         // 数字签证
         parame.put("sign", sign);
 
@@ -178,7 +183,7 @@ public class ApiPayController extends ApiBaseAction {
         log.info("xml:" + xml);
         Map<String, Object> resultUn = null;
         try {
-            resultUn = XmlUtil.xmlStrToMap(WechatUtil.requestOnce(ResourceUtil.getConfigByName("wx.orderquery"), xml));
+            resultUn = XmlUtil.xmlStrToMap(WechatUtil.requestOnce(wxConfig.getOrderquery(), xml, wxConfig.getMchId()));
         } catch (Exception e) {
             e.printStackTrace();
             return toResponsFail("查询失败,error=" + e.getMessage());
@@ -297,10 +302,15 @@ public class ApiPayController extends ApiBaseAction {
 //            return toResponsObject(400, "订单未付款，不能退款", "");
 //        }
 
-//        WechatRefundApiResult result = WechatUtil.wxRefund(orderInfo.getId().toString(),
-//                orderInfo.getActual_price().doubleValue(), orderInfo.getActual_price().doubleValue());
         WechatRefundApiResult result = WechatUtil.wxRefund(orderInfo.getId().toString(),
-                10.01, 10.01);
+                orderInfo.getActualPrice().doubleValue(),
+                orderInfo.getActualPrice().doubleValue(),
+                wxConfig.getCertName(),
+                wxConfig.getAppId(),
+                wxConfig.getMchId(),
+                wxConfig.getPaySignKey(),
+                wxConfig.getRefundUrl());
+
         if (result.getResult_code().equals("SUCCESS")) {
             if (orderInfo.getOrderStatus() == 201) {
                 orderInfo.setOrderStatus(401);

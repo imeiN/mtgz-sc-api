@@ -6,6 +6,7 @@ import com.mtgz.common.service.common.entity.SysSmsLogEntity;
 import com.mtgz.common.service.common.exp.RRException;
 import com.mtgz.xw.api.web.annotation.IgnoreAuth;
 import com.mtgz.common.service.common.util.*;
+import com.mtgz.xw.api.web.config.SmsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,8 @@ import java.util.Map;
 public class ApiSmsController {
     @Autowired
     private CommonClient commonClient;
+    @Autowired
+    private SmsConfig smsConfig;
 
     /**
      * 发送短信
@@ -39,7 +42,7 @@ public class ApiSmsController {
     public R sendSms(HttpServletRequest request, @RequestParam Map<String, String> params) {
         SysSmsLogEntity smsLog = new SysSmsLogEntity();
         String validIP = RequestUtil.getIpAddrByRequest(request);
-        if (ResourceUtil.getConfigByName("sms.validIp").indexOf(validIP) < 0) {
+        if (smsConfig.getValidIp().indexOf(validIP) < 0) {
             throw new RRException("非法IP请求！");
         }
         smsLog.setMobile(params.get("mobile"));

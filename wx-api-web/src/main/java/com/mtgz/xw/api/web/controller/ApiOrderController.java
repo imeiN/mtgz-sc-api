@@ -4,6 +4,7 @@ import com.mtgz.xw.api.common.AppConstants;
 import com.mtgz.xw.api.dao.model.*;
 import com.mtgz.xw.api.web.annotation.IgnoreAuth;
 import com.mtgz.xw.api.web.annotation.LoginUser;
+import com.mtgz.xw.api.web.config.WxConfig;
 import com.mtgz.xw.api.web.service.*;
 import com.mtgz.common.service.common.util.ApiPageUtils;
 import com.mtgz.common.service.common.util.Query;
@@ -39,6 +40,8 @@ public class ApiOrderController extends ApiBaseAction {
     private ApiOrderGoodsService orderGoodsService;
     @Autowired
     private ApiKdniaoService apiKdniaoService;
+    @Autowired
+    private WxConfig wxConfig;
 
     /**
      */
@@ -180,8 +183,16 @@ public class ApiOrderController extends ApiBaseAction {
             }
             // 需要退款
             if (orderVo.getPayStatus() == 2) {
+//                WechatRefundApiResult result = WechatUtil.wxRefund(orderVo.getId().toString(),
+//                        0.01, 0.01);
                 WechatRefundApiResult result = WechatUtil.wxRefund(orderVo.getId().toString(),
-                        0.01, 0.01);
+                        orderVo.getActualPrice().doubleValue(),
+                        orderVo.getActualPrice().doubleValue(),
+                        wxConfig.getCertName(),
+                        wxConfig.getAppId(),
+                        wxConfig.getMchId(),
+                        wxConfig.getPaySignKey(),
+                        wxConfig.getRefundUrl());
                 if (result.getResult_code().equals("SUCCESS")) {
                     if (orderVo.getOrderStatus() == 201) {
                         orderVo.setOrderStatus(401);
