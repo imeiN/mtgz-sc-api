@@ -36,10 +36,10 @@ public interface MyMapper<T> extends Mapper<T>, MySqlMapper<T> {
     }
 
     default int save(T t){
-        return insert(t);
+        return insertSelective(t);
     }
 
     default int update(T t){
-        return updateByPrimaryKey(t);
+        return updateByPrimaryKeySelective(t);
     }
 }

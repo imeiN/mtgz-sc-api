@@ -328,7 +328,7 @@ public class ApiGoodsController extends ApiBaseAction {
             params.put("order", "desc");
         }
         //添加到搜索历史
-        if (!StringUtils.isNotBlank(keyword)) {
+        if (StringUtils.isNotBlank(keyword)) {
             SearchHistory searchHistoryVo = new SearchHistory();
             searchHistoryVo.setAddTime(System.currentTimeMillis() / 1000);
             searchHistoryVo.setKeyword(keyword);
