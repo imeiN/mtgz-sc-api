@@ -32,9 +32,9 @@ mapper:
 
 #小程序ID
 wx:
-  appId:
+  appId: wx2e7e1dc740f6c95d
   #小程序密钥
-  secret:
+  secret: 560b55d4548916570ad7cb0530e291a8
   #商户号
   mchId:
   #支付签名
