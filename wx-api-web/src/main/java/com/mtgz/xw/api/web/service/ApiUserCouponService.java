@@ -12,44 +12,44 @@ import java.util.Map;
 @Service
 public class ApiUserCouponService {
     @Autowired
-    private UserCouponMapper userCouponDao;
+    private UserCouponMapper userCouponMapper;
 
 
     public UserCoupon selectByPrimaryKey(Integer id) {
-        return userCouponDao.selectByPrimaryKey(id);
+        return userCouponMapper.selectByPrimaryKey(id);
     }
 
     public UserCoupon queryByCouponNumber(String couponNumber) {
-        return userCouponDao.queryByCouponNumber(couponNumber);
+        return userCouponMapper.queryByCouponNumber(couponNumber);
     }
 
     public List<UserCoupon> selectByMap(Map<String, Object> map) {
-        return userCouponDao.selectByMap(map);
+        return userCouponMapper.selectByMap(map);
     }
 
 
     public int countByMap(Map<String, Object> map) {
-        return userCouponDao.countByMap(map);
+        return userCouponMapper.countByMap(map);
     }
 
 
     public void save(UserCoupon goods) {
-        userCouponDao.save(goods);
+        userCouponMapper.save(goods);
     }
 
 
     public void update(UserCoupon goods) {
-        userCouponDao.update(goods);
+        userCouponMapper.update(goods);
     }
 
 
     public void delete(Integer id) {
-        userCouponDao.delete(id);
+        userCouponMapper.delete(id);
     }
 
 
     public void deleteBatch(Integer[] ids) {
-        userCouponDao.deleteBatch(ids);
+        userCouponMapper.deleteBatch(ids);
     }
 
 }

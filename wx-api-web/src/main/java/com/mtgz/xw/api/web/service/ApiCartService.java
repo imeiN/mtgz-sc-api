@@ -15,30 +15,30 @@ import java.util.Map;
 @Service
 public class ApiCartService {
     @Autowired
-    private CartMapper cartDao;
+    private CartMapper cartMapper;
 
     public Cart selectByPrimaryKey(Integer id) {
-        return cartDao.selectByPrimaryKey(id);
+        return cartMapper.selectByPrimaryKey(id);
     }
 
 
     public List<Cart> selectByMap(Map<String, Object> map) {
-        return cartDao.selectByMap(map);
+        return cartMapper.selectByMap(map);
     }
 
 
     public int countByMap(Map<String, Object> map) {
-        return cartDao.countByMap(map);
+        return cartMapper.countByMap(map);
     }
 
 
     public void save(Cart cart) {
-        cartDao.insertSelective(cart);
+        cartMapper.insertSelective(cart);
         // 更新购物车搭配减价
         // 判断购物车中是否存在此规格商品
         Map cartParam = new HashMap();
         cartParam.put("user_id", cart.getUserId());
-        List<Cart> cartInfoList = cartDao.selectByMap(cartParam);
+        List<Cart> cartInfoList = cartMapper.selectByMap(cartParam);
         Map crashParam = new HashMap();
         List<Integer> goods_ids = new ArrayList();
         List<Cart> cartUpdateList = new ArrayList();
@@ -64,32 +64,32 @@ public class ApiCartService {
         }
         if (null != cartUpdateList && cartUpdateList.size() > 0) {
             for (Cart cartItem : cartUpdateList) {
-                cartDao.updateByPrimaryKey(cartItem);
+                cartMapper.updateByPrimaryKey(cartItem);
             }
         }
     }
 
     public void update(Cart cart) {
-        cartDao.updateByPrimaryKey(cart);
+        cartMapper.updateByPrimaryKey(cart);
     }
 
 
     public void delete(Integer id) {
-        cartDao.deleteByPrimaryKey(id);
+        cartMapper.deleteByPrimaryKey(id);
     }
 
 
     public void deleteBatch(Integer[] ids) {
-        cartDao.deleteBatch(ids);
+        cartMapper.deleteBatch(ids);
     }
 
     public void updateCheck(String[] productIds, Integer isChecked, Long userId) {
-        cartDao.updateCheck(productIds, isChecked, userId);
+        cartMapper.updateCheck(productIds, isChecked, userId);
 
         // 判断购物车中是否存在此规格商品
         Map cartParam = new HashMap();
         cartParam.put("user_id", userId);
-        List<Cart> cartInfoList = cartDao.selectByMap(cartParam);
+        List<Cart> cartInfoList = cartMapper.selectByMap(cartParam);
         Map crashParam = new HashMap();
         List<Integer> goods_ids = new ArrayList();
         List<Cart> cartUpdateList = new ArrayList();
@@ -118,21 +118,21 @@ public class ApiCartService {
         }
         if (null != cartUpdateList && cartUpdateList.size() > 0) {
             for (Cart cartItem : cartUpdateList) {
-                cartDao.updateByPrimaryKey(cartItem);
+                cartMapper.updateByPrimaryKey(cartItem);
             }
         }
     }
 
     public void deleteByProductIds(String[] productIds) {
-        cartDao.deleteByProductIds(productIds);
+        cartMapper.deleteByProductIds(productIds);
     }
 
     public void deleteByUserAndProductIds(Long userId, String[] productIds) {
-        cartDao.deleteByUserAndProductIds(userId, productIds);
+        cartMapper.deleteByUserAndProductIds(userId, productIds);
     }
 
     public void deleteByCart(Long user_id, Integer session_id, Integer checked) {
-        cartDao.deleteByCart(user_id, session_id, checked);
+        cartMapper.deleteByCart(user_id, session_id, checked);
     }
 
 }

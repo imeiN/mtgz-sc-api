@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mtgz.xw.api.dao.mapper.KeywordsMapper" >
-  <resultMap id="BaseResultMap" type="com.mtgz.xw.api.dao.model.Keywords" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="keyword" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="is_hot" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="is_default" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="is_show" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="sort_order" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="scheme_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
-    </constructor>
-  </resultMap>
-
-  <!--<select id="selectByPrimaryKey" resultMap="keywordsMap">-->
-  <!--select * from nideshop_keywords where keyword = #{value}-->
-  <!--</select>-->
 
   <select id="selectByMap" parameterType="com.mtgz.xw.api.dao.model.Keywords">
     select

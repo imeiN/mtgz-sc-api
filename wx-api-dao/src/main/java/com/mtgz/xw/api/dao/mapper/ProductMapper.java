@@ -9,5 +9,4 @@ import java.util.Map;
 public interface ProductMapper extends MyMapper<Product> {
     Product selectById(Integer id);
 
-    List<Product> selectBy(Map<String, Object> map);
 }

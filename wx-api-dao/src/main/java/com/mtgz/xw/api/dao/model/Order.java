@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.*;
 
@@ -131,8 +132,8 @@ public class Order {
     private Integer goodsCount; //订单的商品
     @Transient
     private String order_status_text;//订单状态的处理
-    @Transient
-    private Map handleOption; //可操作的选项
+//    @Transient
+//    private Map handleOption; //可操作的选项
     @Transient
     private BigDecimal full_cut_price; //订单满减
     @Transient
@@ -142,5 +143,31 @@ public class Order {
     //快递公司code
     @Transient
     private String shipping_code;
+
+
+    static Map<String, Integer> payHandle = new HashMap<>();
+    static Map<String, Integer> cancelHandle = new HashMap<>();
+    static Map<String, Integer> deliverHandle = new HashMap<>();
+    static Map<String, Integer> initHandle = new HashMap<>();
+
+    static {
+        initHandle.put("pay", 1);
+
+        payHandle.put("confirm", 1);
+
+    }
+
+    public Map getHandleOption() {
+        if (orderStatus == 0) {
+            return initHandle;
+        }
+
+        if (orderStatus == 1) {
+            return payHandle;
+        }
+
+        return cancelHandle;
+    }
+
 
 }

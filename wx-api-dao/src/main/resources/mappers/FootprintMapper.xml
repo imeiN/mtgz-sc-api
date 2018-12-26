@@ -2,36 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mtgz.xw.api.dao.mapper.FootprintMapper" >
 
-  <select id="selectBy" resultType="com.mtgz.xw.api.dao.model.Footprint">
-    select f.id,f.user_id,f.goods_id,f.add_time add_time,f.referrer,
-    g.name as name, g.list_pic_url as list_pic_url, g.goods_brief as goods_brief, g.retail_price as
-    retail_price
-    from nideshop_footprint f
-    <if test="maxFoot == true">
-      left join nideshop_footprint max on f.goods_id = max.goods_id and f.user_id = max.user_id
-      and max.add_time > f.add_time
-    </if>
-    left join nideshop_goods g on f.goods_id = g.id
-    <where>
-      <if test="user_id != null">
-        and f.user_id = #{user_id}
-      </if>
-      <if test="maxFoot == true">
-        and max.id is null
-      </if>
-    </where>
-    <choose>
-      <when test="sidx != null and sidx.trim() != ''">
-        order by ${sidx} ${order}
-      </when>
-      <otherwise>
-        order by f.id desc
-      </otherwise>
-    </choose>
-    <if test="offset != null and limit != null">
-      limit #{offset}, #{limit}
-    </if>
-  </select>
+    <select id="selectByMap" resultType="com.mtgz.xw.api.dao.model.Footprint">
+        select f.id,f.user_id,f.goods_id,f.add_time add_time,f.referrer,
+        g.name as name, g.list_pic_url as list_pic_url, g.goods_brief as goods_brief, g.retail_price as
+        retail_price
+        from nideshop_footprint f
+        <if test="maxFoot == true">
+            left join nideshop_footprint max on f.goods_id = max.goods_id and f.user_id = max.user_id
+            and max.add_time > f.add_time
+        </if>
+        left join nideshop_goods g on f.goods_id = g.id
+        <where>
+            <if test="user_id != null">
+                and f.user_id = #{user_id}
+            </if>
+            <if test="maxFoot == true">
+                and max.id is null
+            </if>
+        </where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by f.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="countByMap" resultType="int">
+        select count(*) from nideshop_footprint f
+        <where>
+            <if test="user_id != null">
+                and f.user_id = #{user_id}
+            </if>
+            <if test="goods_id != null">
+                and f.goods_id = #{goods_id}
+            </if>
+            <if test="referrer != null">
+                and f.referrer = #{referrer}
+            </if>
+        </where>
+    </select>
 
     <select id="selectByMapFootprint" resultType="com.mtgz.xw.api.dao.model.Footprint">
         SELECT

@@ -9,8 +9,6 @@ import java.util.Map;
 public interface FootprintMapper extends MyMapper<Footprint> {
     int deleteByParam(Map<String, Object> map);
 
-    List<Footprint> selectBy(Map<String, Object> map);
-
     List<Footprint> shareList(Map<String, Object> map);
 
     List<Footprint> selectByMapFootprint(String userid);

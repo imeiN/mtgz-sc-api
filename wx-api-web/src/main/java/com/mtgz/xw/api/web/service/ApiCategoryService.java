@@ -12,41 +12,41 @@ import java.util.Map;
 @Service
 public class ApiCategoryService {
 	@Autowired
-	private CategoryMapper categoryDao;
+	private CategoryMapper categoryMapper;
 	
 	
 	public Category selectByPrimaryKey(Integer id){
-		return categoryDao.selectByPrimaryKey(id);
+		return categoryMapper.selectByPrimaryKey(id);
 	}
 	
 	
 	public List<Category> selectByMap(Map<String, Object> map){
-		return categoryDao.selectByMap(map);
+		return categoryMapper.selectByMap(map);
 	}
 	
 	
 	public int countByMap(Map<String, Object> map){
-		return categoryDao.countByMap(map);
+		return categoryMapper.countByMap(map);
 	}
 	
 	
 	public void save(Category category){
-		categoryDao.insertSelective(category);
+		categoryMapper.insertSelective(category);
 	}
 	
 	
 	public void update(Category category){
-		categoryDao.updateByPrimaryKey(category);
+		categoryMapper.updateByPrimaryKey(category);
 	}
 	
 	
 	public void delete(Integer id){
-		categoryDao.deleteByPrimaryKey(id);
+		categoryMapper.deleteByPrimaryKey(id);
 	}
 	
 	
 	public void deleteBatch(Integer[] ids){
-		categoryDao.deleteBatch(ids);
+		categoryMapper.deleteBatch(ids);
 	}
 	
 }

@@ -6,7 +6,7 @@
     select * from nideshop_user_coupon where coupon_number = #{coupon_number}
   </select>
 
-  <select id="selectBy" resultType="com.mtgz.xw.api.dao.model.UserCoupon">
+  <select id="selectByMap" resultType="com.mtgz.xw.api.dao.model.UserCoupon">
     select a.* from nideshop_user_coupon a
     left join nideshop_coupon b on b.id = a.coupon_id
     where 1 = 1
@@ -36,6 +36,10 @@
     <if test="offset != null and limit != null">
       limit #{offset}, #{limit}
     </if>
+  </select>
+
+  <select id="countByMap" resultType="int">
+    select count(*) from nideshop_user_coupon
   </select>
 
 </mapper>

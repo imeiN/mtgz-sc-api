@@ -22,7 +22,7 @@
     where user_id = #{userId}
   </select>
 
-  <select id="selectBy" resultType="com.mtgz.xw.api.dao.model.Token">
+  <select id="selectByMap" resultType="com.mtgz.xw.api.dao.model.Token">
     select
     user_id,
     token,
@@ -41,6 +41,11 @@
     <if test="offset != null and limit != null">
       limit #{offset}, #{limit}
     </if>
+  </select>
+
+  <select id="countByMap" resultType="int">
+    select count(*) from tb_token
+    WHERE 1=1
   </select>
 
 </mapper>

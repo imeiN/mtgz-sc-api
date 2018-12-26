@@ -12,44 +12,44 @@ import java.util.Map;
 @Service
 public class ApiSearchHistoryService {
     @Autowired
-    private SearchHistoryMapper searchHistoryDao;
+    private SearchHistoryMapper searchHistoryMapper;
 
 
     public SearchHistory selectByPrimaryKey(Integer id) {
-        return searchHistoryDao.selectByPrimaryKey(id);
+        return searchHistoryMapper.selectByPrimaryKey(id);
     }
 
 
     public List<SearchHistory> selectByMap(Map<String, Object> map) {
-        return searchHistoryDao.selectByMap(map);
+        return searchHistoryMapper.selectByMap(map);
     }
 
 
     public int countByMap(Map<String, Object> map) {
-        return searchHistoryDao.countByMap(map);
+        return searchHistoryMapper.countByMap(map);
     }
 
 
     public void save(SearchHistory region) {
-        searchHistoryDao.insertSelective(region);
+        searchHistoryMapper.insertSelective(region);
     }
 
 
     public void update(SearchHistory region) {
-        searchHistoryDao.update(region);
+        searchHistoryMapper.update(region);
     }
 
 
     public void delete(Integer id) {
-        searchHistoryDao.delete(id);
+        searchHistoryMapper.delete(id);
     }
 
 
     public void deleteBatch(Integer[] ids) {
-        searchHistoryDao.deleteBatch(ids);
+        searchHistoryMapper.deleteBatch(ids);
     }
 
     public void deleteByUserId(Long userId) {
-        searchHistoryDao.deleteByUserId(userId);
+        searchHistoryMapper.deleteByUserId(userId);
     }
 }

@@ -12,41 +12,41 @@ import java.util.Map;
 @Service
 public class ApiChannelService {
     @Autowired
-    private ChannelMapper channelDao;
+    private ChannelMapper channelMapper;
 
 
     public Channel selectByPrimaryKey(Integer id) {
-        return channelDao.selectByPrimaryKey(id);
+        return channelMapper.selectByPrimaryKey(id);
     }
 
 
     public List<Channel> selectByMap(Map<String, Object> map) {
-        return channelDao.selectByMap(map);
+        return channelMapper.selectByMap(map);
     }
 
 
     public int countByMap(Map<String, Object> map) {
-        return channelDao.countByMap(map);
+        return channelMapper.countByMap(map);
     }
 
 
     public void save(Channel order) {
-        channelDao.insertSelective(order);
+        channelMapper.insertSelective(order);
     }
 
 
     public void update(Channel order) {
-        channelDao.updateByPrimaryKey(order);
+        channelMapper.updateByPrimaryKey(order);
     }
 
 
     public void delete(Integer id) {
-        channelDao.deleteByPrimaryKey(id);
+        channelMapper.deleteByPrimaryKey(id);
     }
 
 
     public void deleteBatch(Integer[] ids) {
-        channelDao.deleteBatch(ids);
+        channelMapper.deleteBatch(ids);
     }
 
 }

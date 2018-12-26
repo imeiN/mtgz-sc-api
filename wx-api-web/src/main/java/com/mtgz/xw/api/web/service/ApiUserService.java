@@ -19,24 +19,24 @@ import java.util.Map;
 @Service
 public class ApiUserService {
     @Autowired
-    private UserMapper userDao;
+    private UserMapper userMapper;
     @Autowired
-    private UserLevelMapper userLevelDao;
+    private UserLevelMapper userLevelMapper;
 
     public User selectByPrimaryKey(Long userId) {
-        return userDao.selectByPrimaryKey(userId);
+        return userMapper.selectByPrimaryKey(userId);
     }
 
     public User queryByOpenId(String openId) {
-        return userDao.queryByOpenId(openId);
+        return userMapper.queryByOpenId(openId);
     }
 
     public List<User> selectByMap(Map<String, Object> map) {
-        return userDao.selectByMap(map);
+        return userMapper.selectByMap(map);
     }
 
     public int countByMap(Map<String, Object> map) {
-        return userDao.countByMap(map);
+        return userMapper.countByMap(map);
     }
 
     public void save(String mobile, String password) {
@@ -45,27 +45,27 @@ public class ApiUserService {
         user.setUsername(mobile);
         user.setPassword(DigestUtils.sha256Hex(password));
         user.setRegisterTime(new Date());
-        userDao.save(user);
+        userMapper.save(user);
     }
 
     public void save(User userVo) {
-        userDao.save(userVo);
+        userMapper.save(userVo);
     }
 
     public void update(User user) {
-        userDao.update(user);
+        userMapper.update(user);
     }
 
     public void delete(Long userId) {
-        userDao.delete(userId);
+        userMapper.delete(userId);
     }
 
     public void deleteBatch(Long[] userIds) {
-        userDao.deleteBatch(userIds);
+        userMapper.deleteBatch(userIds);
     }
 
     public User queryByMobile(String mobile) {
-        return userDao.queryByMobile(mobile);
+        return userMapper.queryByMobile(mobile);
     }
 
     public long login(String mobile, String password) {
@@ -81,17 +81,17 @@ public class ApiUserService {
     }
 
     public SmsLog querySmsCodeByUserId(Long user_id) {
-        return userDao.querySmsCodeByUserId(user_id);
+        return userMapper.querySmsCodeByUserId(user_id);
     }
 
 
     public int saveSmsCodeLog(SmsLog smsLogVo) {
-        return userDao.saveSmsCodeLog(smsLogVo);
+        return userMapper.saveSmsCodeLog(smsLogVo);
     }
 
     public String getUserLevel(User loginUser) {
         String result = "普通用户";
-        UserLevel userLevelVo = userLevelDao.selectByPrimaryKey(loginUser.getUserLevelId());
+        UserLevel userLevelVo = userLevelMapper.selectByPrimaryKey(loginUser.getUserLevelId());
         if (null != userLevelVo) {
             result = userLevelVo.getName();
         }

@@ -9,6 +9,4 @@ import java.util.Map;
 
 public interface SearchHistoryMapper extends MyMapper<SearchHistory> {
     int deleteByUserId(@Param("user_id") Long userId);
-
-    List<SearchHistory> selectBy(Map<String, Object> map);
 }

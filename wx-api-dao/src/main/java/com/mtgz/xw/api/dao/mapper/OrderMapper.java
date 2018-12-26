@@ -9,5 +9,4 @@ import java.util.Map;
 public interface OrderMapper extends MyMapper<Order> {
     Order selectWithShopCodeByPrimaryKey(Integer id);
 
-    List<Order> selectBy(Map<String, Object> map);
 }

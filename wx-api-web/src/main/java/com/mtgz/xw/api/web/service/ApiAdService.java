@@ -12,41 +12,41 @@ import java.util.Map;
 @Service
 public class ApiAdService {
     @Autowired
-    private AdMapper adDao;
+    private AdMapper adMapper;
 
 
     public Ad selectByPrimaryKey(Integer id) {
-        return adDao.selectByPrimaryKey(id);
+        return adMapper.selectByPrimaryKey(id);
     }
 
 
     public List<Ad> selectByMap(Map<String, Object> map) {
-        return adDao.selectByMap(map);
+        return adMapper.selectByMap(map);
     }
 
 
     public int countByMap(Map<String, Object> map) {
-        return adDao.countByMap(map);
+        return adMapper.countByMap(map);
     }
 
 
     public void save(Ad brand) {
-        adDao.insertSelective(brand);
+        adMapper.insertSelective(brand);
     }
 
 
     public void update(Ad brand) {
-        adDao.updateByPrimaryKey(brand);
+        adMapper.updateByPrimaryKey(brand);
     }
 
 
     public void delete(Integer id) {
-        adDao.deleteByPrimaryKey(id);
+        adMapper.deleteByPrimaryKey(id);
     }
 
 
     public void deleteBatch(Integer[] ids) {
-        adDao.deleteBatch(ids);
+        adMapper.deleteBatch(ids);
     }
 
 }

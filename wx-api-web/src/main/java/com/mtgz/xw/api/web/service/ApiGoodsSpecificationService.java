@@ -12,41 +12,41 @@ import java.util.Map;
 @Service
 public class ApiGoodsSpecificationService {
     @Autowired
-    private GoodsSpecificationMapper goodsDao;
+    private GoodsSpecificationMapper goodsMapper;
 
 
     public GoodsSpecification selectByPrimaryKey(Integer id) {
-        return goodsDao.selectByPrimaryKey(id);
+        return goodsMapper.selectByPrimaryKey(id);
     }
 
 
     public List<GoodsSpecification> selectByMap(Map<String, Object> map) {
-        return goodsDao.selectByMap(map);
+        return goodsMapper.selectByMap(map);
     }
 
 
     public int countByMap(Map<String, Object> map) {
-        return goodsDao.countByMap(map);
+        return goodsMapper.countByMap(map);
     }
 
 
     public void save(GoodsSpecification goods) {
-        goodsDao.save(goods);
+        goodsMapper.save(goods);
     }
 
 
     public void update(GoodsSpecification goods) {
-        goodsDao.update(goods);
+        goodsMapper.update(goods);
     }
 
 
     public void delete(Integer id) {
-        goodsDao.delete(id);
+        goodsMapper.delete(id);
     }
 
 
     public void deleteBatch(Integer[] ids) {
-        goodsDao.deleteBatch(ids);
+        goodsMapper.deleteBatch(ids);
     }
 
 }

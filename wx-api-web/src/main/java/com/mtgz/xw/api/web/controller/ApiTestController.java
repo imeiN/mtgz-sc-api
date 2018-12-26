@@ -1,6 +1,7 @@
 package com.mtgz.xw.api.web.controller;
 
-import com.mtgz.common.service.common.AppConstants;
+import com.mtgz.common.service.common.CommonAppConstants;
+import com.mtgz.xw.api.common.AppConstants;
 import com.mtgz.xw.api.dao.model.User;
 import com.mtgz.xw.api.web.annotation.IgnoreAuth;
 import com.mtgz.xw.api.web.annotation.LoginUser;

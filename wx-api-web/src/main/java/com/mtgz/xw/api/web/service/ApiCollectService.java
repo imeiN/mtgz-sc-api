@@ -12,41 +12,41 @@ import java.util.Map;
 @Service
 public class ApiCollectService {
     @Autowired
-    private CollectMapper collectDao;
+    private CollectMapper collectMapper;
 
 
     public Collect selectByPrimaryKey(Integer id) {
-        return collectDao.selectByPrimaryKey(id);
+        return collectMapper.selectByPrimaryKey(id);
     }
 
 
     public List<Collect> selectByMap(Map<String, Object> map) {
-        return collectDao.selectByMap(map);
+        return collectMapper.selectByMap(map);
     }
 
 
     public int countByMap(Map<String, Object> map) {
-        return collectDao.countByMap(map);
+        return collectMapper.countByMap(map);
     }
 
 
     public int save(Collect collect) {
-        return collectDao.insertSelective(collect);
+        return collectMapper.insertSelective(collect);
     }
 
 
     public void update(Collect collect) {
-        collectDao.updateByPrimaryKey(collect);
+        collectMapper.updateByPrimaryKey(collect);
     }
 
 
     public int delete(Integer id) {
-        return collectDao.deleteByPrimaryKey(id);
+        return collectMapper.deleteByPrimaryKey(id);
     }
 
 
     public void deleteBatch(Integer[] ids) {
-        collectDao.deleteBatch(ids);
+        collectMapper.deleteBatch(ids);
     }
 
 }

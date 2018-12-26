@@ -1,16 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mtgz.xw.api.dao.mapper.GoodsSpecificationMapper" >
-  <resultMap id="BaseResultMap" type="com.mtgz.xw.api.dao.model.GoodsSpecification" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="specification_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="value" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="pic_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
-  </resultMap>
+
+  <select id="selectByMap" resultType="com.mtgz.xw.api.dao.model.GoodsSpecification">
+    select
+    <if test="fields != null and fields != ''">
+      ${fields}
+    </if>
+    <if test="fields == null or fields == ''">
+      gs.*
+    </if>
+    from nideshop_goods_specification gs
+    <if test="specification == true">
+      inner join nideshop_specification s on gs.specification_id= s.id
+    </if>
+    <where>
+      <if test="goods_id != null">
+        and gs.goods_id = #{goods_id}
+      </if>
+      <if test="ids != null">
+        and  gs.id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+          #{id}
+        </foreach>
+      </if>
+    </where>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by gs.id desc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+    <select id="countByMap" resultType="int">
+        select count(*) from nideshop_goods_specification
+    </select>
+
 </mapper>

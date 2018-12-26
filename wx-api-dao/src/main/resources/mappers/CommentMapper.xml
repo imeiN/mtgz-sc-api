@@ -1,18 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mtgz.xw.api.dao.mapper.CommentMapper" >
-  <resultMap id="BaseResultMap" type="com.mtgz.xw.api.dao.model.Comment" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="type_id" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="value_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="content" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="add_time" jdbcType="BIGINT" javaType="java.lang.Long" />
-      <arg column="status" jdbcType="TINYINT" javaType="java.lang.Byte" />
-      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-    </constructor>
-  </resultMap>
+
+  <select id="selectByMap" resultType="com.mtgz.xw.api.dao.model.Comment">
+    select distinct c.* from nideshop_comment c
+    <if test="hasPic != null and hasPic == 1">
+      left join nideshop_comment_picture cp on cp.comment_id = c.id
+    </if>
+    where 1 = 1
+    <if test="type_id != null and type_id != ''">
+      and c.type_id = #{type_id}
+    </if>
+    <if test="value_id != null and value_id != ''">
+      and c.value_id = #{value_id}
+    </if>
+    <if test="goods_id != null and goods_id != ''">
+      and c.value_id = #{goods_id}
+    </if>
+    <if test="user_id != null and user_id != ''">
+      and c.user_id = #{user_id}
+    </if>
+    <if test="hasPic != null and hasPic == 1">
+      and cp.id is not null
+    </if>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by id desc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+    <select id="countByMap" resultType="int">
+        select count(c.id) from nideshop_comment c
+        where 1= 1
+        <if test="type_id != null and type_id != ''">
+            and c.type_id = #{type_id}
+        </if>
+        <if test="value_id != null and value_id != ''">
+            and c.value_id = #{value_id}
+        </if>
+        <if test="goods_id != null and goods_id != ''">
+            and c.value_id = #{goods_id}
+        </if>
+    </select>
+
 </mapper>

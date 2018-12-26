@@ -12,41 +12,41 @@ import java.util.Map;
 @Service
 public class ApiTopicService {
     @Autowired
-    private TopicMapper topicDao;
+    private TopicMapper topicMapper;
 
 
     public Topic selectByPrimaryKey(Integer id) {
-        return topicDao.selectByPrimaryKey(id);
+        return topicMapper.selectByPrimaryKey(id);
     }
 
 
     public List<Topic> selectByMap(Map<String, Object> map) {
-        return topicDao.selectByMap(map);
+        return topicMapper.selectByMap(map);
     }
 
 
     public int countByMap(Map<String, Object> map) {
-        return topicDao.countByMap(map);
+        return topicMapper.countByMap(map);
     }
 
 
     public void save(Topic topic) {
-        topicDao.save(topic);
+        topicMapper.save(topic);
     }
 
 
     public void update(Topic topic) {
-        topicDao.update(topic);
+        topicMapper.update(topic);
     }
 
 
     public void delete(Integer id) {
-        topicDao.delete(id);
+        topicMapper.delete(id);
     }
 
 
     public void deleteBatch(Integer[] ids) {
-        topicDao.deleteBatch(ids);
+        topicMapper.deleteBatch(ids);
     }
 
 }

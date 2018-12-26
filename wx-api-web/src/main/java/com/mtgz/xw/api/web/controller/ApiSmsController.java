@@ -1,9 +1,10 @@
 package com.mtgz.xw.api.web.controller;
 
 import com.mtgz.common.service.client.CommonClient;
-import com.mtgz.common.service.common.AppConstants;
+import com.mtgz.common.service.common.CommonAppConstants;
 import com.mtgz.common.service.common.entity.SysSmsLogEntity;
 import com.mtgz.common.service.common.exp.RRException;
+import com.mtgz.xw.api.common.AppConstants;
 import com.mtgz.xw.api.web.annotation.IgnoreAuth;
 import com.mtgz.common.service.common.util.*;
 import com.mtgz.xw.api.web.config.SmsConfig;

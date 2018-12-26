@@ -12,41 +12,41 @@ import java.util.Map;
 @Service
 public class ApiAddressService {
     @Autowired
-    private AddressMapper addressDao;
+    private AddressMapper addressMapper;
 
 
     public Address selectByPrimaryKey(Integer id) {
-        return addressDao.selectByPrimaryKey(id);
+        return addressMapper.selectByPrimaryKey(id);
     }
 
 
     public List<Address> selectByMap(Map<String, Object> map) {
-        return addressDao.selectByMap(map);
+        return addressMapper.selectByMap(map);
     }
 
 
     public int countByMap(Map<String, Object> map) {
-        return addressDao.countByMap(map);
+        return addressMapper.countByMap(map);
     }
 
 
     public void save(Address address) {
-        addressDao.save(address);
+        addressMapper.save(address);
     }
 
 
     public void update(Address address) {
-        addressDao.updateByPrimaryKey(address);
+        addressMapper.updateByPrimaryKey(address);
     }
 
 
     public void delete(Integer id) {
-        addressDao.deleteByPrimaryKey(id);
+        addressMapper.deleteByPrimaryKey(id);
     }
 
 
     public void deleteBatch(Integer[] ids) {
-        addressDao.deleteBatch(ids);
+        addressMapper.deleteBatch(ids);
     }
 
 }

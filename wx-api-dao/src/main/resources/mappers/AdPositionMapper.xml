@@ -2,4 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mtgz.xw.api.dao.mapper.AdPositionMapper" >
 
+    <select id="selectByMap" resultType="com.mtgz.xw.api.dao.model.AdPosition">
+        select * from nideshop_ad_position
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="countByMap" resultType="int">
+        select count(*) from nideshop_ad_position
+    </select>
 </mapper>

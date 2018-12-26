@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mtgz.xw.api.dao.mapper.HelpIssueMapper" >
-  <resultMap id="BaseResultMap" type="com.mtgz.xw.api.dao.model.HelpIssue" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="type_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="question" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="answer" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="sort" jdbcType="INTEGER" javaType="java.lang.Integer" />
-    </constructor>
-  </resultMap>
+
+  <select id="selectByMap" resultType="com.mtgz.xw.api.dao.model.HelpIssue">
+    select
+    `id`,
+    `type_id`,
+    `question`,
+    `answer`,
+    `sort`
+    from nideshop_help_issue
+    WHERE 1=1
+    <if test="type_id != null and type_id != ''">
+      AND type_id = #{type_id}
+    </if>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by sort asc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+  <select id="countByMap" resultType="int">
+    select count(*) from nideshop_help_issue
+    WHERE 1=1
+    <if test="name != null and name.trim() != ''">
+      AND name LIKE concat('%',#{name},'%')
+    </if>
+  </select>
+
 </mapper>

@@ -8,7 +8,7 @@
     where a.id = #{value}
   </select>
 
-  <select id="selectBy" resultType="com.mtgz.xw.api.dao.model.Product">
+  <select id="selectByMap" resultType="com.mtgz.xw.api.dao.model.Product">
     select a.*,
     b.name as goods_name,
     b.list_pic_url as list_pic_url
@@ -30,6 +30,10 @@
     <if test="offset != null and limit != null">
       limit #{offset}, #{limit}
     </if>
+  </select>
+
+  <select id="countByMap" resultType="int">
+    select count(*) from nideshop_product
   </select>
 
 </mapper>

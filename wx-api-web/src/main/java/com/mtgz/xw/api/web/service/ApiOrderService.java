@@ -19,8 +19,6 @@ import java.util.*;
 @Service
 public class ApiOrderService {
     @Autowired
-    private OrderMapper orderDao;
-    @Autowired
     private AddressMapper addressMapper;
     @Autowired
     private CartMapper cartMapper;
@@ -37,37 +35,37 @@ public class ApiOrderService {
     CacheClient cacheClient;
 
     public Order selectByPrimaryKey(Integer id) {
-        return orderDao.selectWithShopCodeByPrimaryKey(id);
+        return orderMapper.selectWithShopCodeByPrimaryKey(id);
     }
 
 
     public List<Order> selectByMap(Map<String, Object> map) {
-        return orderDao.selectByMap(map);
+        return orderMapper.selectByMap(map);
     }
 
 
     public int countByMap(Map<String, Object> map) {
-        return orderDao.countByMap(map);
+        return orderMapper.countByMap(map);
     }
 
 
     public void save(Order order) {
-        orderDao.save(order);
+        orderMapper.save(order);
     }
 
 
     public int update(Order order) {
-        return orderDao.update(order);
+        return orderMapper.update(order);
     }
 
 
     public void delete(Integer id) {
-        orderDao.delete(id);
+        orderMapper.delete(id);
     }
 
 
     public void deleteBatch(Integer[] ids) {
-        orderDao.deleteBatch(ids);
+        orderMapper.deleteBatch(ids);
     }
 
 

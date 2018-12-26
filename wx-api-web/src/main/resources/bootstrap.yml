@@ -13,11 +13,11 @@ logging:
 
 spring:
   application:
-    name: graphql
+    name: wx-api
     ###################### consul ###########################
   cloud:
 #    config:
-#      name: fulin-squeezy
+#      name: wx-api
 #      profile: test
 #      label: patch-10
 #      enabled: true
@@ -31,7 +31,7 @@ spring:
       discovery:
         healthCheckUrl: http://localhost:${server.port}/health
         healthCheckInterval: 15s
-        instance-id: graphql:${random.value}
+        instance-id: wx-api:${random.value}
         hostname: agent
         enabled: true
         heartbeat:

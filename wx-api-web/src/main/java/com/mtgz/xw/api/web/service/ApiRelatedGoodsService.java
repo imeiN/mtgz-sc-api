@@ -12,44 +12,44 @@ import java.util.Map;
 @Service
 public class ApiRelatedGoodsService {
     @Autowired
-    private RelatedGoodsMapper relatedGoodsDao;
+    private RelatedGoodsMapper relatedGoodsMapper;
 
 
     public RelatedGoods selectByPrimaryKey(Integer id) {
-        return relatedGoodsDao.selectByPrimaryKey(id);
+        return relatedGoodsMapper.selectByPrimaryKey(id);
     }
 
 
     public List<RelatedGoods> selectByMap(Map<String, Object> map) {
-        return relatedGoodsDao.selectByMap(map);
+        return relatedGoodsMapper.selectByMap(map);
     }
 
 
     public int countByMap(Map<String, Object> map) {
-        return relatedGoodsDao.countByMap(map);
+        return relatedGoodsMapper.countByMap(map);
     }
 
     public int queryhasPicTotal(Map<String, Object> map) {
-        return relatedGoodsDao.countByMap(map);
+        return relatedGoodsMapper.countByMap(map);
     }
 
     public int save(RelatedGoods comment) {
-        return relatedGoodsDao.save(comment);
+        return relatedGoodsMapper.save(comment);
     }
 
 
     public void update(RelatedGoods comment) {
-        relatedGoodsDao.update(comment);
+        relatedGoodsMapper.update(comment);
     }
 
 
     public void delete(Integer id) {
-        relatedGoodsDao.delete(id);
+        relatedGoodsMapper.delete(id);
     }
 
 
     public void deleteBatch(Integer[] ids) {
-        relatedGoodsDao.deleteBatch(ids);
+        relatedGoodsMapper.deleteBatch(ids);
     }
 
 }

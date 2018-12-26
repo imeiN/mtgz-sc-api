@@ -1,26 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mtgz.xw.api.dao.mapper.CategoryMapper" >
-  <resultMap id="BaseResultMap" type="com.mtgz.xw.api.dao.model.Category" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="keywords" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="front_desc" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="parent_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="sort_order" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="show_index" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="is_show" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="banner_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="icon_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="img_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="wap_banner_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="level" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="front_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
-  </resultMap>
+
+  <select id="selectByMap" resultType="com.mtgz.xw.api.dao.model.Category">
+    select
+    <if test="fields != null and fields != ''">
+      ${fields}
+    </if>
+    <if test="fields == null or fields == ''">
+      *
+    </if>
+    from nideshop_category
+    where 1 = 1
+    <if test="parent_id != null and parent_id != null">
+      and parent_id = #{parent_id}
+    </if>
+    <if test="notName != null and notName != null">
+      and 'name' != #{notName}
+    </if>
+    <if test="ids != null">
+      and id in
+      <foreach item="item" collection="ids" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by id asc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+  <select id="countByMap" resultType="int">
+    select count(*) from nideshop_category
+  </select>
+
 </mapper>

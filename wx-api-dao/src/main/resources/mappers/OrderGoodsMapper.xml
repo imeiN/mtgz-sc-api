@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mtgz.xw.api.dao.mapper.OrderGoodsMapper" >
-  <resultMap id="BaseResultMap" type="com.mtgz.xw.api.dao.model.OrderGoods" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="goods_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="goods_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="number" jdbcType="SMALLINT" javaType="java.lang.Short" />
-      <arg column="market_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="retail_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="is_real" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="goods_specifition_ids" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="list_pic_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="goods_specifition_name_value" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
-    </constructor>
-  </resultMap>
+
+  <select id="selectByMap" resultType="com.mtgz.xw.api.dao.model.OrderGoods">
+    select * from nideshop_order_goods
+    <where>
+      <if test="order_id != null and order_id != ''">
+        and order_id = #{order_id}
+      </if>
+    </where>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by id desc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+  <select id="countByMap" resultType="int">
+    select count(*) from nideshop_order_goods
+  </select>
 </mapper>

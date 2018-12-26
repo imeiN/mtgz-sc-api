@@ -12,40 +12,40 @@ import java.util.Map;
 @Service
 public class ApiCommentPictureService {
     @Autowired
-    private CommentPictureMapper commentPictureDao;
+    private CommentPictureMapper commentPictureMapper;
 
 
     public CommentPicture selectByPrimaryKey(Integer id) {
-        return commentPictureDao.selectByPrimaryKey(id);
+        return commentPictureMapper.selectByPrimaryKey(id);
     }
 
 
     public List<CommentPicture> selectByMap(Map<String, Object> map) {
-        return commentPictureDao.selectByMap(map);
+        return commentPictureMapper.selectByMap(map);
     }
 
 
     public int countByMap(Map<String, Object> map) {
-        return commentPictureDao.countByMap(map);
+        return commentPictureMapper.countByMap(map);
     }
 
     public int save(CommentPicture comment) {
-        return commentPictureDao.insertSelective(comment);
+        return commentPictureMapper.insertSelective(comment);
     }
 
 
     public void update(CommentPicture comment) {
-        commentPictureDao.updateByPrimaryKey(comment);
+        commentPictureMapper.updateByPrimaryKey(comment);
     }
 
 
     public void delete(Integer id) {
-        commentPictureDao.deleteByPrimaryKey(id);
+        commentPictureMapper.deleteByPrimaryKey(id);
     }
 
 
     public void deleteBatch(Integer[] ids) {
-        commentPictureDao.deleteBatch(ids);
+        commentPictureMapper.deleteBatch(ids);
     }
 
 }

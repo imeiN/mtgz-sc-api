@@ -2,8 +2,9 @@ package com.mtgz.xw.api.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mtgz.common.service.client.SysClient;
-import com.mtgz.common.service.common.AppConstants;
+import com.mtgz.common.service.common.CommonAppConstants;
 import com.mtgz.common.service.common.entity.SmsConfig;
+import com.mtgz.xw.api.common.AppConstants;
 import com.mtgz.xw.api.dao.model.SmsLog;
 import com.mtgz.xw.api.dao.model.User;
 import com.mtgz.xw.api.web.annotation.LoginUser;

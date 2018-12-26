@@ -12,44 +12,44 @@ import java.util.Map;
 @Service
 public class ApiKeywordsService {
     @Autowired
-    private KeywordsMapper keywordsDao;
+    private KeywordsMapper keywordsMapper;
 
 
     public Keywords selectByPrimaryKey(Integer id) {
-        return keywordsDao.selectByPrimaryKey(id);
+        return keywordsMapper.selectByPrimaryKey(id);
     }
 
 
     public List<Keywords> selectByMap(Map<String, Object> map) {
-        return keywordsDao.selectByMap(map);
+        return keywordsMapper.selectByMap(map);
     }
 
 
     public int countByMap(Map<String, Object> map) {
-        return keywordsDao.countByMap(map);
+        return keywordsMapper.countByMap(map);
     }
 
 
     public void save(Keywords goods) {
-        keywordsDao.save(goods);
+        keywordsMapper.save(goods);
     }
 
 
     public void update(Keywords goods) {
-        keywordsDao.update(goods);
+        keywordsMapper.update(goods);
     }
 
 
     public void delete(Integer id) {
-        keywordsDao.delete(id);
+        keywordsMapper.delete(id);
     }
 
 
     public void deleteBatch(Integer[] ids) {
-        keywordsDao.deleteBatch(ids);
+        keywordsMapper.deleteBatch(ids);
     }
 
     public List<Map> hotKeywordList(Map<String, Object> map) {
-        return keywordsDao.hotKeywordList(map);
+        return keywordsMapper.hotKeywordList(map);
     }
 }

@@ -2,4 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mtgz.xw.api.dao.mapper.AttributeMapper" >
 
+    <select id="selectByMap" resultType="com.mtgz.xw.api.dao.model.Attribute">
+        select
+        <if test="fields != null and fields != ''">
+            ${fields}
+        </if>
+        <if test="fields == null or fields == ''">
+            *
+        </if>
+        from nideshop_attribute na
+        left join nideshop_goods_attribute nga ON nga.attribute_id=na.id
+        <where>
+            <if test="goods_id != null">
+                and nga.goods_id = #{goods_id}
+            </if>
+        </where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by na.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="countByMap" resultType="int">
+        select count(*) from nideshop_attribute
+    </select>
+
 </mapper>

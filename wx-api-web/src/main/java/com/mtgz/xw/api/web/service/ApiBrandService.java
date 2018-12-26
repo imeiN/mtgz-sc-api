@@ -12,41 +12,41 @@ import java.util.Map;
 @Service
 public class ApiBrandService {
 	@Autowired
-	private BrandMapper brandDao;
+	private BrandMapper brandMapper;
 	
 	
 	public Brand selectByPrimaryKey(Integer id){
-		return brandDao.selectByPrimaryKey(id);
+		return brandMapper.selectByPrimaryKey(id);
 	}
 	
 	
 	public List<Brand> selectByMap(Map<String, Object> map){
-		return brandDao.selectByMap(map);
+		return brandMapper.selectByMap(map);
 	}
 	
 	
 	public int countByMap(Map<String, Object> map){
-		return brandDao.countByMap(map);
+		return brandMapper.countByMap(map);
 	}
 	
 	
 	public void save(Brand brand){
-		brandDao.insertSelective(brand);
+		brandMapper.insertSelective(brand);
 	}
 	
 	
 	public void update(Brand brand){
-		brandDao.updateByPrimaryKey(brand);
+		brandMapper.updateByPrimaryKey(brand);
 	}
 	
 	
 	public void delete(Integer id){
-		brandDao.deleteByPrimaryKey(id);
+		brandMapper.deleteByPrimaryKey(id);
 	}
 	
 	
 	public void deleteBatch(Integer[] ids){
-		brandDao.deleteBatch(ids);
+		brandMapper.deleteBatch(ids);
 	}
 	
 }

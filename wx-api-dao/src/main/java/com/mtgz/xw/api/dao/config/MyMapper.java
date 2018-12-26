@@ -9,13 +9,10 @@ import java.util.Map;
 
 
 public interface MyMapper<T> extends Mapper<T>, MySqlMapper<T> {
-    default List<T> selectByMap(Map<String, Object> map) {
-        return select((T) JSON.parse(JSON.toJSONString(map)));
-    }
 
-    default int countByMap(Map<String, Object> map) {
-        return selectCount((T) JSON.parse(JSON.toJSONString(map)));
-    }
+    List<T> selectByMap(Map<String, Object> map);
+
+    int countByMap(Map<String, Object> map);
 
     default int deleteBatch(Object[] ids) {
         int rows = 0;

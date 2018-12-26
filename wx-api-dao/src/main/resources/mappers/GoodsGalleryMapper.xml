@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mtgz.xw.api.dao.mapper.GoodsGalleryMapper" >
-  <resultMap id="BaseResultMap" type="com.mtgz.xw.api.dao.model.GoodsGallery" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="goods_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="img_desc" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="sort_order" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="img_url" jdbcType="LONGVARBINARY" javaType="byte[]" />
-    </constructor>
-  </resultMap>
+
+  <select id="selectByMap" resultType="com.mtgz.xw.api.dao.model.GoodsGallery">
+    select
+    <if test="fields != null and fields != ''">
+      ${fields}
+    </if>
+    <if test="fields == null or fields == ''">
+      *
+    </if>
+    from nideshop_goods_gallery
+    <where>
+      <if test="goods_id != null">
+        and goods_id = #{goods_id}
+      </if>
+    </where>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by id desc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+  <select id="countByMap" resultType="int">
+    select count(*) from nideshop_goods_gallery
+  </select>
 </mapper>

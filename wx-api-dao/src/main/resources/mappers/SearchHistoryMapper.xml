@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mtgz.xw.api.dao.mapper.SearchHistoryMapper" >
 
-  <select id="selectBy" resultType="com.mtgz.xw.api.dao.model.SearchHistory">
+  <select id="selectByMap" resultType="com.mtgz.xw.api.dao.model.SearchHistory">
     select
     <if test="fields != null and fields != ''">
       ${fields}
@@ -27,6 +27,11 @@
     <if test="offset != null and limit != null">
       limit #{offset}, #{limit}
     </if>
+  </select>
+
+
+  <select id="countByMap" resultType="int">
+    select count(*) from nideshop_search_history
   </select>
 
   <delete id="deleteByUserId">

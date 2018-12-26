@@ -2,6 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mtgz.xw.api.dao.mapper.CouponMapper" >
 
+    <select id="selectByMap" resultType="com.mtgz.xw.api.dao.model.Coupon">
+        select * from nideshop_coupon a
+        where 1 = 1
+        <if test="send_types != null">
+            and send_type in
+            <foreach item="item" collection="send_types" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="enabled != null and enabled == true">
+            and a.use_end_date >= now()
+            and now() >= a.use_start_date
+        </if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by a.id desc
+            </otherwise>
+        </choose>
+    </select>
+
   <select id="queryUserCoupons" resultType="com.mtgz.xw.api.dao.model.Coupon">
     select a.*,b.coupon_number,b.user_id,b.coupon_status,b.id user_coupon_id
     from nideshop_coupon a

@@ -18,33 +18,33 @@ import java.util.Map;
 @Service
 public class ApiHelpTypeService {
     @Autowired
-    private HelpTypeMapper helpTypeDao;
+    private HelpTypeMapper helpTypeMapper;
 
     public HelpType selectByPrimaryKey(Integer id) {
-        return helpTypeDao.selectByPrimaryKey(id);
+        return helpTypeMapper.selectByPrimaryKey(id);
     }
 
     public List<HelpType> selectByMap(Map<String, Object> map) {
-        return helpTypeDao.selectByMap(map);
+        return helpTypeMapper.selectByMap(map);
     }
 
     public int countByMap(Map<String, Object> map) {
-        return helpTypeDao.countByMap(map);
+        return helpTypeMapper.countByMap(map);
     }
 
     public int save(HelpType helpType) {
-        return helpTypeDao.save(helpType);
+        return helpTypeMapper.save(helpType);
     }
 
     public int update(HelpType helpType) {
-        return helpTypeDao.update(helpType);
+        return helpTypeMapper.update(helpType);
     }
 
     public int delete(Integer id) {
-        return helpTypeDao.delete(id);
+        return helpTypeMapper.delete(id);
     }
 
     public int deleteBatch(Integer[] ids) {
-        return helpTypeDao.deleteBatch(ids);
+        return helpTypeMapper.deleteBatch(ids);
     }
 }

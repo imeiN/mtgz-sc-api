@@ -12,48 +12,48 @@ import java.util.Map;
 @Service
 public class ApiGoodsService {
     @Autowired
-    private GoodsMapper goodsDao;
+    private GoodsMapper goodsMapper;
 
 
     public Goods selectByPrimaryKey(Integer id) {
-        return goodsDao.selectByPrimaryKey(id);
+        return goodsMapper.selectByPrimaryKey(id);
     }
 
 
     public List<Goods> selectByMap(Map<String, Object> map) {
-        return goodsDao.selectByMap(map);
+        return goodsMapper.selectByMap(map);
     }
 
 
     public int countByMap(Map<String, Object> map) {
-        return goodsDao.countByMap(map);
+        return goodsMapper.countByMap(map);
     }
 
 
     public void save(Goods goods) {
-        goodsDao.save(goods);
+        goodsMapper.save(goods);
     }
 
 
     public void update(Goods goods) {
-        goodsDao.update(goods);
+        goodsMapper.update(goods);
     }
 
 
     public void delete(Integer id) {
-        goodsDao.delete(id);
+        goodsMapper.delete(id);
     }
 
 
     public void deleteBatch(Integer[] ids) {
-        goodsDao.deleteBatch(ids);
+        goodsMapper.deleteBatch(ids);
     }
 
     public List<Goods> queryHotGoodsList(Map<String, Object> map) {
-        return goodsDao.queryHotGoodsList(map);
+        return goodsMapper.queryHotGoodsList(map);
     }
 
     public List<Goods> queryCatalogProductList(Map<String, Object> map) {
-        return goodsDao.queryCatalogProductList(map);
+        return goodsMapper.queryCatalogProductList(map);
     }
 }

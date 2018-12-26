@@ -40,6 +40,6 @@ public class GoodsGallery {
      * 图片
      */
     @Column(name = "img_url")
-    private byte[] imgUrl;
+    private String imgUrl;
 
 }

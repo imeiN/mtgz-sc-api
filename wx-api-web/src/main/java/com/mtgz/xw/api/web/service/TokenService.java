@@ -14,24 +14,24 @@ import java.util.Map;
 @Service
 public class TokenService {
     @Autowired
-    private TokenMapper tokenDao;
+    private TokenMapper tokenMapper;
     //12小时后过期
     private final static int EXPIRE = 3600 * 12;
 
     public Token queryByUserId(Long userId) {
-        return tokenDao.queryByUserId(userId);
+        return tokenMapper.queryByUserId(userId);
     }
 
     public Token queryByToken(String token) {
-        return tokenDao.queryByToken(token);
+        return tokenMapper.queryByToken(token);
     }
 
     public void save(Token token) {
-        tokenDao.save(token);
+        tokenMapper.save(token);
     }
 
     public void update(Token token) {
-        tokenDao.update(token);
+        tokenMapper.update(token);
     }
 
     public Map<String, Object> createToken(long userId) {

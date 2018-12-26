@@ -1,7 +1,9 @@
 package com.mtgz.xw.api.web;
 
 import com.mtgz.xw.api.web.resolver.LoginUserHandlerMethodArgumentResolver;
+import com.mtgz.xw.api.web.service.ApiUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -25,9 +27,15 @@ public class FrameworkApplication extends WebMvcConfigurerAdapter {
 		SpringApplication.run(FrameworkApplication.class, args);
 	}
 
+	@Autowired
+	ApiUserService apiUserService;
+
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 		super.addArgumentResolvers(argumentResolvers);
-		argumentResolvers.add(new LoginUserHandlerMethodArgumentResolver());
+
+		LoginUserHandlerMethodArgumentResolver resolver = new LoginUserHandlerMethodArgumentResolver();
+		resolver.setUserService(apiUserService);
+		argumentResolvers.add(resolver);
 	}
 }
