@@ -29,7 +29,7 @@
         <maven.surefire.plugin.version>2.17</maven.surefire.plugin.version>
 
         <!--项目启动入口-->
-        <start.class>com.mtgz.xw.api.web.FrameworkApplication</start.class>
+        <start.class>com.mtgz.xw.api.web.WxApiApplication</start.class>
         <spring.boot.version>2.1.0.RELEASE</spring.boot.version>
         <module.version>1.0-SNAPSHOT</module.version>
         <spring-cloud.version>Finchley.SR1</spring-cloud.version>
