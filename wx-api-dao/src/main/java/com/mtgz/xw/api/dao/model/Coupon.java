@@ -58,6 +58,6 @@ public class Coupon {
 
     //可用 1:可用 0：不可用
     @Transient
-    private Integer enabled = 0;
+    private Integer enabled = 1;
 
 }

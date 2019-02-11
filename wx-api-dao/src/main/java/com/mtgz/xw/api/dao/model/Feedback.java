@@ -16,8 +16,8 @@ public class Feedback {
      * 主键
      */
     @Id
-    @Column(name = "msg_id")
-    private Integer msgId;
+    @Column(name = "id")
+    private Integer id;
 
     /**
      * 会员Id

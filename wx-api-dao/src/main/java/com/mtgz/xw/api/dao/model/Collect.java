@@ -45,4 +45,7 @@ public class Collect {
     @Column(name = "type_id")
     private Integer typeId;
 
+    @Transient
+    private Object obj;
+
 }

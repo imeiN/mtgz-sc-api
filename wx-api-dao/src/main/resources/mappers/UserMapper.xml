@@ -13,8 +13,8 @@
   <select id="queryByMobile" resultType="com.mtgz.xw.api.dao.model.User">
     select * from nideshop_user
     where 1 = 1
-    <if test="mobile != null">
-      and `mobile` = #{mobile}
+    <if test="phone != null">
+      and `phone` = #{phone}
     </if>
   </select>
 
@@ -44,26 +44,25 @@
     a.sms_text
     from nideshop_sms_log a
     left join nideshop_sms_log b on a.user_id = b.user_id and b.log_date > a.log_date
-    where a.user_id = #{user_id} and b.id is null
+    where a.user_id = #{userId} and b.id is null
   </select>
 
   <insert id="saveSmsCodeLog" parameterType="com.mtgz.xw.api.dao.model.SmsLog">
     insert into nideshop_sms_log(
-    `id`,
     `user_id`,
-    `phone`,
     `log_date`,
+    `phone`,
     `sms_code`,
-    `send_status`,
-    `sms_text`)
+    `sms_text`,
+    `send_status`
+    )
     values(
-    #{id},
-    #{user_id},
+    #{userId},
+    #{logDate},
     #{phone},
-    #{log_date},
-    #{sms_code},
-    #{send_status},
-    #{sms_text}
+    #{smsCode},
+    #{smsText},
+    #{sendStatus}
     )
   </insert>
 </mapper>

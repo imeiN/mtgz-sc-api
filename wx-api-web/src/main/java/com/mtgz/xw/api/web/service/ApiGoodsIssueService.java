@@ -36,7 +36,7 @@ public class ApiGoodsIssueService {
 
 
     public void update(GoodsIssue goods) {
-        goodsIssueMapper.updateByPrimaryKey(goods);
+        goodsIssueMapper.updateByPrimaryKeySelective(goods);
     }
 
 

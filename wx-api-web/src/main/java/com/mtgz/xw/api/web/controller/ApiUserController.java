@@ -2,8 +2,6 @@ package com.mtgz.xw.api.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mtgz.common.service.client.SysClient;
-import com.mtgz.common.service.common.CommonAppConstants;
-import com.mtgz.common.service.common.entity.SmsConfig;
 import com.mtgz.xw.api.common.AppConstants;
 import com.mtgz.xw.api.dao.model.SmsLog;
 import com.mtgz.xw.api.dao.model.User;
@@ -43,51 +41,56 @@ public class ApiUserController extends ApiBaseAction {
         String phone = jsonParams.getString("phone");
         // 一分钟之内不能重复发送短信
         SmsLog smsLogVo = userService.querySmsCodeByUserId(loginUser.getId());
-        if (null != smsLogVo && (System.currentTimeMillis() / 1000 - smsLogVo.getLog_date()) < 1 * 60) {
-            return toResponsFail("短信已发送");
-        }
+//        if (null != smsLogVo && (System.currentTimeMillis() / 1000 - smsLogVo.getLog_date()) < 1 * 60) {
+//            return toResponsFail("短信已发送");
+//        }
         //生成验证码
         String sms_code = CharUtil.getRandomNum(4);
         String msgContent = "您的验证码是：" + sms_code + "，请在页面中提交验证码完成验证。";
         // 发送短信
-        String result = "";
-        //获取云存储配置信息
-        SmsConfig config = sysClient.getConfigObject(Constant.SMS_CONFIG_KEY, SmsConfig.class);
-        if (StringUtils.isNullOrEmpty(config)) {
-            return toResponsFail("请先配置短信平台信息");
-        }
-        if (StringUtils.isNullOrEmpty(config.getName())) {
-            return toResponsFail("请先配置短信平台用户名");
-        }
-        if (StringUtils.isNullOrEmpty(config.getPwd())) {
-            return toResponsFail("请先配置短信平台密钥");
-        }
-        if (StringUtils.isNullOrEmpty(config.getSign())) {
-            return toResponsFail("请先配置短信平台签名");
-        }
-        try {
-            /**
-             * 状态,发送编号,无效号码数,成功提交数,黑名单数和消息，无论发送的号码是多少，一个发送请求只返回一个sendid，如果响应的状态不是“0”，则只有状态和消息
-             */
-            result = SmsUtil.crSendSms(config.getName(), config.getPwd(), phone, msgContent, config.getSign(),
-                    DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"), "");
-        } catch (Exception e) {
+//        String result = "";
+//        //获取云存储配置信息
+//        SmsConfig config = sysClient.getConfigObject(Constant.SMS_CONFIG_KEY, SmsConfig.class);
+//        if (StringUtils.isNullOrEmpty(config)) {
+//            return toResponsFail("请先配置短信平台信息");
+//        }
+//        if (StringUtils.isNullOrEmpty(config.getName())) {
+//            return toResponsFail("请先配置短信平台用户名");
+//        }
+//        if (StringUtils.isNullOrEmpty(config.getPwd())) {
+//            return toResponsFail("请先配置短信平台密钥");
+//        }
+//        if (StringUtils.isNullOrEmpty(config.getSign())) {
+//            return toResponsFail("请先配置短信平台签名");
+//        }
+//        try {
+//            /**
+//             * 状态,发送编号,无效号码数,成功提交数,黑名单数和消息，无论发送的号码是多少，一个发送请求只返回一个sendid，如果响应的状态不是“0”，则只有状态和消息
+//             */
+//            result = SmsUtil.crSendSms(config.getName(), config.getPwd(), phone, msgContent, config.getSign(),
+//                    DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"), "");
+//        } catch (Exception e) {
+//
+//        }
+//        String arr[] = result.split(",");
 
-        }
-        String arr[] = result.split(",");
-
-        if ("0".equals(arr[0])) {
+//        if ("0".equals(arr[0])) {
+        if (true) {
             smsLogVo = new SmsLog();
-            smsLogVo.setLog_date(System.currentTimeMillis() / 1000);
+            smsLogVo.setLogDate(System.currentTimeMillis() / 1000);
             smsLogVo.setUserId(loginUser.getId());
-            smsLogVo.setMobile(phone);
-            smsLogVo.setContent(sms_code);
-            smsLogVo.setContent(msgContent);
+            smsLogVo.setPhone(phone);
+            smsLogVo.setSmsCode(sms_code);
+            smsLogVo.setSmsText(msgContent);
+            smsLogVo.setSendStatus(1);
+            smsLogVo.setStime(new Date());
             userService.saveSmsCodeLog(smsLogVo);
             return toResponsSuccess("短信发送成功");
-        } else {
-            return toResponsFail("短信发送失败");
         }
+//        else {
+//            return toResponsFail("短信发送失败");
+//        }
+        return toResponsFail("短信发送失败");
     }
 
     /**
@@ -115,7 +118,7 @@ public class ApiUserController extends ApiBaseAction {
         String mobile_code = jsonParams.getString("mobile_code");
         String mobile = jsonParams.getString("mobile");
 
-        if (!mobile_code.equals(smsLogVo.getContent())) {
+        if (!mobile_code.equals(smsLogVo.getSmsCode())) {
             return toResponsFail("验证码错误");
         }
         User userVo = userService.selectByPrimaryKey(loginUser.getId());

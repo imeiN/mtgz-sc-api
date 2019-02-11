@@ -3,9 +3,11 @@ package com.mtgz.xw.api.web.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.mtgz.xw.api.common.AppConstants;
 import com.mtgz.xw.api.dao.model.Collect;
+import com.mtgz.xw.api.dao.model.Goods;
 import com.mtgz.xw.api.dao.model.User;
 import com.mtgz.xw.api.web.annotation.LoginUser;
 import com.mtgz.xw.api.web.service.ApiCollectService;
+import com.mtgz.xw.api.web.service.ApiGoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 作者: @author Harmon <br>
@@ -29,6 +30,9 @@ public class ApiCollectController extends ApiBaseAction {
     @Autowired
     private ApiCollectService collectService;
 
+    @Autowired
+    private ApiGoodsService apiGoodsService;
+
     /**
      * 获取用户收藏
      */
@@ -41,9 +45,19 @@ public class ApiCollectController extends ApiBaseAction {
         param.put("type_id", typeId);
         List<Collect> collectEntities = collectService.selectByMap(param);
 
-//        Query query = new Query(param);
-//        int total = collectService.countByMap(query);
-//        ApiPageUtils pageUtil = new ApiPageUtils(collectEntities, total, query.getLimit(), query.getPage());
+        collectEntities = Optional.ofNullable(collectEntities)
+                .orElse(new ArrayList<>())
+                .stream()
+                .map(collect -> {
+                    if (collect.getTypeId() == 0) {
+                        Goods goods = apiGoodsService.selectByPrimaryKey(collect.getValueId());
+                        collect.setObj(goods);
+                    } else {
+                        // do nothing
+                    }
+                    return collect;
+                }).collect(Collectors.toList());
+
         return toResponsSuccess(collectEntities);
     }
 

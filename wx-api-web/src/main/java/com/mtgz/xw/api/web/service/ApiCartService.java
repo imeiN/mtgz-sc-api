@@ -70,7 +70,7 @@ public class ApiCartService {
     }
 
     public void update(Cart cart) {
-        cartMapper.updateByPrimaryKey(cart);
+        cartMapper.updateByPrimaryKeySelective(cart);
     }
 
 

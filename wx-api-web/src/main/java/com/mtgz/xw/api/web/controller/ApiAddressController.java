@@ -69,15 +69,33 @@ public class ApiAddressController extends ApiBaseAction {
         if (null != addressJson) {
             entity.setId(addressJson.getInteger("id"));
             entity.setUserId(loginUser.getId());
-            entity.setUserName(addressJson.getString("userName"));
-            entity.setPostalCode(addressJson.getString("postalCode"));
-            entity.setProvinceName(addressJson.getString("provinceName"));
-            entity.setCityName(addressJson.getString("cityName"));
-            entity.setCountyName(addressJson.getString("countyName"));
-            entity.setDetailInfo(addressJson.getString("detailInfo"));
-            entity.setNationalCode(addressJson.getString("nationalCode"));
-            entity.setTelNumber(addressJson.getString("telNumber"));
-            entity.setIsDefault(addressJson.getInteger("is_default"));
+            if (addressJson.containsKey("userName")) {
+                entity.setUserName(addressJson.getString("userName"));
+            }
+            if (addressJson.containsKey("postalCode")) {
+                entity.setPostalCode(addressJson.getString("postalCode"));
+            }
+            if (addressJson.containsKey("provinceName")) {
+                entity.setProvinceName(addressJson.getString("provinceName"));
+            }
+            if (addressJson.containsKey("cityName")) {
+                entity.setCityName(addressJson.getString("cityName"));
+            }
+            if (addressJson.containsKey("countyName")) {
+                entity.setCountyName(addressJson.getString("countyName"));
+            }
+            if (addressJson.containsKey("detailInfo")) {
+                entity.setDetailInfo(addressJson.getString("detailInfo"));
+            }
+            if (addressJson.containsKey("nationalCode")) {
+                entity.setNationalCode(addressJson.getString("nationalCode"));
+            }
+            if (addressJson.containsKey("telNumber")) {
+                entity.setTelNumber(addressJson.getString("telNumber"));
+            }
+            if (addressJson.containsKey("isDefault")) {
+                entity.setIsDefault(addressJson.getInteger("isDefault"));
+            }
         }
         if (null == entity.getId() || entity.getId() == 0) {
             entity.setId(null);

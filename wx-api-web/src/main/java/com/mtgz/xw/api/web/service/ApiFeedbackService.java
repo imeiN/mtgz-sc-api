@@ -36,7 +36,7 @@ public class ApiFeedbackService {
 
 
     public void update(Feedback feedbackVo) {
-        feedbackMapper.updateByPrimaryKey(feedbackVo);
+        feedbackMapper.updateByPrimaryKeySelective(feedbackVo);
     }
 
 

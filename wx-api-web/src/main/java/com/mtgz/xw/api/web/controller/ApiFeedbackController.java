@@ -38,10 +38,10 @@ public class ApiFeedbackController extends ApiBaseAction {
             Feedback feedbackVo = new Feedback();
             feedbackVo.setUserId(loginUser.getId().intValue());
             feedbackVo.setUserName(loginUser.getUsername());
-            feedbackVo.setMobile(feedbackJson.getString("mobile"));
+            feedbackVo.setMobile(feedbackJson.getString("phone"));
             feedbackVo.setFeedType(feedbackJson.getInteger("index"));
             feedbackVo.setStatus(1);
-            feedbackVo.setContent(feedbackJson.getString("content"));
+            feedbackVo.setContent(feedbackJson.getString("smsCode"));
             feedbackVo.setAddTime(new Date());
             feedbackService.save(feedbackVo);
             return super.toResponsSuccess("感谢你的反馈");

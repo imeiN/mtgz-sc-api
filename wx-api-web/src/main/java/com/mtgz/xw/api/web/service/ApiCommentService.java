@@ -39,7 +39,7 @@ public class ApiCommentService {
 
 
     public void update(Comment comment) {
-        commentMapper.updateByPrimaryKey(comment);
+        commentMapper.updateByPrimaryKeySelective(comment);
     }
 
 

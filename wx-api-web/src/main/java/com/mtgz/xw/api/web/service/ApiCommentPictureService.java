@@ -35,7 +35,7 @@ public class ApiCommentPictureService {
 
 
     public void update(CommentPicture comment) {
-        commentPictureMapper.updateByPrimaryKey(comment);
+        commentPictureMapper.updateByPrimaryKeySelective(comment);
     }
 
 

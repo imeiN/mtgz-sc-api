@@ -36,7 +36,7 @@ public class ApiCollectService {
 
 
     public void update(Collect collect) {
-        collectMapper.updateByPrimaryKey(collect);
+        collectMapper.updateByPrimaryKeySelective(collect);
     }
 
 

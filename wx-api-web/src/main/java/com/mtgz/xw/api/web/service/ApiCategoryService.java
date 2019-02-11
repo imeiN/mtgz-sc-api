@@ -36,7 +36,7 @@ public class ApiCategoryService {
 	
 	
 	public void update(Category category){
-		categoryMapper.updateByPrimaryKey(category);
+		categoryMapper.updateByPrimaryKeySelective(category);
 	}
 	
 	

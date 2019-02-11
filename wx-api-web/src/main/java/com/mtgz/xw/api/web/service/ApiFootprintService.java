@@ -42,7 +42,7 @@ public class ApiFootprintService {
 
 
     public void update(Footprint footprint) {
-        footprintMapper.updateByPrimaryKey(footprint);
+        footprintMapper.updateByPrimaryKeySelective(footprint);
     }
 
 

@@ -36,7 +36,7 @@ public class ApiGoodsGalleryService {
 
 
     public void update(GoodsGallery goods) {
-        goodsGalleryMapper.updateByPrimaryKey(goods);
+        goodsGalleryMapper.updateByPrimaryKeySelective(goods);
     }
 
 

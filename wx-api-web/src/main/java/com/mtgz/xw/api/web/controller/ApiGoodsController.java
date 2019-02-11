@@ -185,7 +185,7 @@ public class ApiGoodsController extends ApiBaseAction {
         Map commentInfo = new HashMap();
         if (null != hotComment && hotComment.size() > 0) {
             User commentUser = userService.selectByPrimaryKey(hotComment.get(0).getUserId());
-            commentInfo.put("content", com.mtgz.common.service.common.util.Base64.decode(hotComment.get(0).getContent()));
+            commentInfo.put("smsCode", com.mtgz.common.service.common.util.Base64.decode(hotComment.get(0).getContent()));
             commentInfo.put("add_time", DateUtils.timeToStr(hotComment.get(0).getAddTime(), DateUtils.DATE_PATTERN));
             commentInfo.put("nickname", commentUser.getNickname());
             commentInfo.put("avatar", commentUser.getAvatar());

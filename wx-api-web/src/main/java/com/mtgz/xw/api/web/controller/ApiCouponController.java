@@ -8,7 +8,6 @@ import com.mtgz.xw.api.dao.model.*;
 import com.mtgz.xw.api.web.annotation.LoginUser;
 import com.mtgz.xw.api.web.service.*;
 import com.mtgz.xw.api.web.vo.BuyGoodsVo;
-import com.mtgz.xw.api.web.vo.SmsLogVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -147,7 +146,7 @@ public class ApiCouponController extends ApiBaseAction {
         String smscode = jsonParam.getString("smscode");
         // 校验短信码
         SmsLog smsLogVo = apiUserService.querySmsCodeByUserId(loginUser.getId());
-        if (null != smsLogVo && !smsLogVo.getContent().equals(smscode)) {
+        if (null != smsLogVo && !smsLogVo.getSmsCode().equals(smscode)) {
             return toResponsFail("短信校验失败");
         }
         // 更新手机号码

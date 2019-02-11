@@ -35,7 +35,7 @@ public class ApiAttributeService {
 
 
     public void update(Attribute goods) {
-        attributeMapper.updateByPrimaryKey(goods);
+        attributeMapper.updateByPrimaryKeySelective(goods);
     }
 
 

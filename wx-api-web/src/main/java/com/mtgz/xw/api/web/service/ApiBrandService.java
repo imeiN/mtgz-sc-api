@@ -36,7 +36,7 @@ public class ApiBrandService {
 	
 	
 	public void update(Brand brand){
-		brandMapper.updateByPrimaryKey(brand);
+		brandMapper.updateByPrimaryKeySelective(brand);
 	}
 	
 	

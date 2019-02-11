@@ -36,7 +36,7 @@ public class ApiAdService {
 
 
     public void update(Ad brand) {
-        adMapper.updateByPrimaryKey(brand);
+        adMapper.updateByPrimaryKeySelective(brand);
     }
 
 

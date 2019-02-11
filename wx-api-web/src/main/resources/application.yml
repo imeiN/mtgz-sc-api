@@ -2,9 +2,9 @@ spring:
   ###################### mysql ###########################
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://database:3306/nideshop?allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/nideshop?allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&useSSL=false
     username: root
-    password: 123456
+    password: root
 
   redis:
     database: 0
@@ -32,17 +32,17 @@ mapper:
 
 #小程序ID
 wx:
-  appId: wx2e7e1dc740f6c95d
+  appId: wx19509f32aaff5cea
   #小程序密钥
-  secret: 560b55d4548916570ad7cb0530e291a8
+  secret: 0cd14e4dde971fa1db3bb1c5da970a69
   #商户号
-  mchId:
+  mchId: 1523500401
   #支付签名
-  paySignKey:
+  paySignKey: 20190115zhejiangxilanpuguiXuxiao
   #交易类型
   tradeType: JSAPI
   #证书名称，对应不同的商户号
-  certName: /cert/apiclient_cert.p12
+  certName: /Users/linyisheng/Desktop/工作资料数据管理/wx/cert/apiclient_cert.p12
   #支付回调地址
   notifyUrl: https://www.fly2you.cn/admin/url/api/notify
   #获取code的请求地址

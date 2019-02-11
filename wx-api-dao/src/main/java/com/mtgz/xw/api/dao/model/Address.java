@@ -3,6 +3,7 @@ package com.mtgz.xw.api.dao.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 
@@ -71,5 +72,15 @@ public class Address {
 
     @Column(name = "is_default")
     private Integer isDefault;
+
+    @Transient
+    private String fullRegion;
+
+    public String getFullRegion(){
+        if (StringUtils.isEmpty(fullRegion)) {
+            fullRegion = getProvinceName() + getCityName() + getCountyName();
+        }
+        return fullRegion;
+    }
 
 }

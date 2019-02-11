@@ -33,7 +33,7 @@ public class ApiCouponService {
     }
 
     public void update(Coupon user) {
-        apiCouponMapper.updateByPrimaryKey(user);
+        apiCouponMapper.updateByPrimaryKeySelective(user);
     }
 
     public void delete(Long userId) {

@@ -36,7 +36,7 @@ public class ApiAddressService {
 
 
     public void update(Address address) {
-        addressMapper.updateByPrimaryKey(address);
+        addressMapper.updateByPrimaryKeySelective(address);
     }
 
 

@@ -36,7 +36,7 @@ public class ApiChannelService {
 
 
     public void update(Channel order) {
-        channelMapper.updateByPrimaryKey(order);
+        channelMapper.updateByPrimaryKeySelective(order);
     }
 
 

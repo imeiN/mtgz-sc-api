@@ -21,10 +21,10 @@ import java.util.List;
 @EnableDiscoveryClient
 @EnableScheduling
 @EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)
-public class FrameworkApplication extends WebMvcConfigurerAdapter {
+public class WxApiApplication extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FrameworkApplication.class, args);
+		SpringApplication.run(WxApiApplication.class, args);
 	}
 
 	@Autowired

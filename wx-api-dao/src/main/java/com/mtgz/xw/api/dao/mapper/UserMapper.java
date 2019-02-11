@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserMapper extends MyMapper<User> {
-    User queryByMobile(@Param("mobile") String mobile);
+    User queryByMobile(@Param("phone") String mobile);
 
     User queryByOpenId(@Param("openId") String openId);
 
@@ -21,7 +21,7 @@ public interface UserMapper extends MyMapper<User> {
      * @param user_id
      * @return
      */
-    SmsLog querySmsCodeByUserId(@Param("user_id") Long user_id);
+    SmsLog querySmsCodeByUserId(@Param("userId") Long user_id);
 
     /**
      * 保存短信

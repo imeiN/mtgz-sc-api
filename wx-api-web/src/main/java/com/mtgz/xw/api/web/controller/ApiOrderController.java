@@ -79,6 +79,7 @@ public class ApiOrderController extends ApiBaseAction {
             orderGoodsParam.put("order_id", item.getId());
             //订单的商品
             List<OrderGoods> goodsList = orderGoodsService.selectByMap(orderGoodsParam);
+            item.setGoodsList(goodsList);
             Integer goodsCount = 0;
             for (OrderGoods orderGoodsEntity : goodsList) {
                 goodsCount += orderGoodsEntity.getNumber();

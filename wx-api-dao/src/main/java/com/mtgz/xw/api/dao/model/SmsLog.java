@@ -84,13 +84,17 @@ public class SmsLog {
     /**
      * 必填参数。发送内容（1-500 个汉字）UTF-8编码
      */
-    private String content;
+    @Column(name = "sms_code")
+    private String smsCode;
+
+    @Column(name = "sms_text")
+    private String smsText;
 
     /**
      * 必填参数。手机号码。多个以英文逗号隔开
      */
-    private String mobile;
+    private String phone;
 
 
-    private Long log_date;
+    private Long logDate;
 }
