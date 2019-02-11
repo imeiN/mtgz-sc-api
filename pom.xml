@@ -211,7 +211,7 @@
     </distributionManagement>
 
     <build>
-        <finalName>fulin-framework</finalName>
+        <finalName>wx-api</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
